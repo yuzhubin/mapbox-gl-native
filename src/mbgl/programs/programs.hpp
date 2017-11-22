@@ -4,6 +4,8 @@
 #include <mbgl/programs/extrusion_texture_program.hpp>
 #include <mbgl/programs/fill_program.hpp>
 #include <mbgl/programs/fill_extrusion_program.hpp>
+#include <mbgl/programs/hillshade_program.hpp>
+#include <mbgl/programs/hillshade_prepare_program.hpp>
 #include <mbgl/programs/line_program.hpp>
 #include <mbgl/programs/raster_program.hpp>
 #include <mbgl/programs/symbol_program.hpp>
@@ -24,6 +26,8 @@ public:
           fillPattern(context, programParameters),
           fillOutline(context, programParameters),
           fillOutlinePattern(context, programParameters),
+          hillshade(context, programParameters),
+          hillshadePrepare(context, programParameters),
           line(context, programParameters),
           lineSDF(context, programParameters),
           linePattern(context, programParameters),
@@ -44,6 +48,8 @@ public:
     ProgramMap<FillPatternProgram> fillPattern;
     ProgramMap<FillOutlineProgram> fillOutline;
     ProgramMap<FillOutlinePatternProgram> fillOutlinePattern;
+    HillshadeProgram hillshade;
+    HillshadePrepareProgram hillshadePrepare;
     ProgramMap<LineProgram> line;
     ProgramMap<LineSDFProgram> lineSDF;
     ProgramMap<LinePatternProgram> linePattern;
