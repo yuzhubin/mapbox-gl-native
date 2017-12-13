@@ -131,12 +131,13 @@ typedef NS_ENUM(NSInteger, MBXSettingsMiscellaneousRows) {
 
 @property (nonatomic) BOOL usingLocaleBasedCountryLabels;
 @property (nonatomic) NSDictionary *annotationViewReuseQueueByIdentifier;
-
+@property (nonatomic) MBXOpenGLLayer *openGlLayer;
 @end
 
 @implementation MBXViewController
 {
     BOOL _isTouringWorld;
+    MBXOpenGLLayer *_openGlLayer;
 }
 
 #pragma mark - Setup & Teardown
@@ -273,12 +274,15 @@ typedef NS_ENUM(NSInteger, MBXSettingsMiscellaneousRows) {
     settingsViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissSettings:)];
     UINavigationController *wrapper = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
     wrapper.navigationBar.tintColor = self.navigationController.navigationBar.tintColor;
+    
     [self.navigationController presentViewController:wrapper animated:YES completion:nil];
 }
 
 - (void)dismissSettings:(__unused id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [_mapView.style removeLayer: _openGlLayer];
+    _openGlLayer = NULL;
 }
 
 - (NSArray <NSString *> *)settingsSectionTitles
@@ -1932,9 +1936,9 @@ typedef NS_ENUM(NSInteger, MBXSettingsMiscellaneousRows) {
     // using locale-based country labels.
     _usingLocaleBasedCountryLabels = [[self bestLanguageForUser] isEqualToString:@"en"];
     
-    MBXOpenGLLayer *layer = [[MBXOpenGLLayer alloc] initWithIdentifier:@"mbx-custom"];
+    _openGlLayer = [[MBXOpenGLLayer alloc] initWithIdentifier:@"mbx-custom"];
     MGLSymbolStyleLayer *symbolLayer = [style layerWithIdentifier:@"admin-3-4-boundaries"];
-    [style insertLayer:layer belowLayer:symbolLayer];
+    [style insertLayer:_openGlLayer belowLayer:symbolLayer];
 
 
 }
