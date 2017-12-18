@@ -5,6 +5,7 @@
 #include <mbgl/renderer/bucket.hpp>
 #include <mbgl/style/layers/custom_layer_impl.hpp>
 #include <mbgl/map/transform_state.hpp>
+#include <mbgl/util/mat4.hpp>
 
 namespace mbgl {
 
@@ -68,6 +69,9 @@ void RenderCustomLayer::render(PaintParameters& paintParameters, RenderSource*) 
     parameters.bearing = -state.getAngle() * util::RAD2DEG;
     parameters.pitch = state.getPitch();
     parameters.fieldOfView = state.getFieldOfView();
+    mat4 projMatrix;
+    state.getProjMatrix(projMatrix);
+    parameters.projectionMatrix = projMatrix;
 
     assert(impl().renderFn);
     impl().renderFn(impl().context, parameters);
