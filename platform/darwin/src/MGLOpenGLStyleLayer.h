@@ -17,6 +17,7 @@ typedef struct MGLStyleLayerDrawingContext {
     CLLocationDirection direction;
     CGFloat pitch;
     CGFloat fieldOfView;
+    double projectionMatrix[16];
 } MGLStyleLayerDrawingContext;
 
 MGL_EXPORT

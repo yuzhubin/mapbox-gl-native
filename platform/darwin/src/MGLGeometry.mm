@@ -106,3 +106,8 @@ CGPoint MGLPointRounded(CGPoint point) {
 #endif
     return CGPointMake(round(point.x * scaleFactor) / scaleFactor, round(point.y * scaleFactor) / scaleFactor);
 }
+
+CLLocationCoordinate2D MGLProjectCoordinate(CLLocationCoordinate2D coordinate, double zoomLevel) {
+    mbgl::Point<double> projectCoordinate = mbgl::Projection::project(MGLLatLngFromLocationCoordinate2D(coordinate), std::pow(2.0, zoomLevel));
+    return CLLocationCoordinate2DMake(projectCoordinate.y, projectCoordinate.x);
+}

@@ -34,8 +34,11 @@ void MGLDrawCustomStyleLayer(void *context, const mbgl::style::CustomLayerRender
         .zoomLevel = params.zoom,
         .direction = mbgl::util::wrap(params.bearing, 0., 360.),
         .pitch = static_cast<CGFloat>(params.pitch),
-        .fieldOfView = static_cast<CGFloat>(params.fieldOfView),
+        .fieldOfView = static_cast<CGFloat>(params.fieldOfView)
     };
+    for (NSUInteger i=0; i < 16; i++) {
+        drawingContext.projectionMatrix[i] = params.projectionMatrix[i];
+    }
     [layer drawInMapView:layer.style.mapView withContext:drawingContext];
 }
 

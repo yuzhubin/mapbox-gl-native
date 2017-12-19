@@ -181,4 +181,7 @@ NS_INLINE CLLocationDegrees MGLDegreesFromRadians(CGFloat radians) {
     return radians * 180 / M_PI;
 }
 
+/** Returns mercator projection of a WGS84 coordinate at the specified zoom level. */
+CLLocationCoordinate2D MGLProjectCoordinate(CLLocationCoordinate2D coordinate, double zoomLevel);
+
 NS_ASSUME_NONNULL_END
