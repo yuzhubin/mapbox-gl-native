@@ -77,6 +77,12 @@ public:
      Converts an NSExpression to a non-interpolatable mbgl property value.
      */
     mbgl::style::PropertyValue<MBGLType> toPropertyValue(NSExpression *expression) {
+        if (expression.expressionType == NSConstantValueExpressionType) {
+            MBGLType mbglValue;
+            getMBGLValue(expression.constantValue, mbglValue);
+            return mbglValue;
+        }
+        
         NSArray *jsonExpression = expression.mgl_jsonExpressionObject;
         
         mbgl::style::conversion::Error valueError;
@@ -126,6 +132,12 @@ public:
      Converts an NSExpression to an interpolatable mbgl property value.
      */
     mbgl::style::PropertyValue<MBGLType> toInterpolatablePropertyValue(NSExpression *expression) {
+        if (expression.expressionType == NSConstantValueExpressionType) {
+            MBGLType mbglValue;
+            getMBGLValue(expression.constantValue, mbglValue);
+            return mbglValue;
+        }
+        
         NSArray *jsonExpression = expression.mgl_jsonExpressionObject;
         
         mbgl::style::conversion::Error valueError;
@@ -183,6 +195,12 @@ public:
      Converts an NSExpression to a data-driven mbgl property value.
      */
     mbgl::style::DataDrivenPropertyValue<MBGLType> toDataDrivenPropertyValue(NSExpression *expression) {
+        if (expression.expressionType == NSConstantValueExpressionType) {
+            MBGLType mbglValue;
+            getMBGLValue(expression.constantValue, mbglValue);
+            return mbglValue;
+        }
+        
         NSArray *jsonExpression = expression.mgl_jsonExpressionObject;
         
         mbgl::style::conversion::Error valueError;
