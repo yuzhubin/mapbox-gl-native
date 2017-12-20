@@ -80,7 +80,7 @@ public:
     }
 
     void eachStop(const std::function<void(double, const Expression&)>& visit) const {
-        for (const std::pair<const double, const std::unique_ptr<Expression>&>& stop : stops) {
+        for (const auto& stop : stops) {
             visit(stop.first, *stop.second);
         }
     }

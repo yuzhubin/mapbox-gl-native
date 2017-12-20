@@ -34,8 +34,8 @@ void Step::eachChild(const std::function<void(const Expression&)>& visit) const 
 }
 
 void Step::eachStop(const std::function<void(double, const Expression&)>& visit) const {
-    for (auto it = stops.begin(); it != stops.end(); it++) {
-        visit(it->first, *it->second);
+    for (const auto &stop : stops) {
+        visit(stop.first, *stop.second);
     }
 }
 
