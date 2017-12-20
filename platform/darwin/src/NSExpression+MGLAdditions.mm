@@ -580,6 +580,14 @@ NSArray *MGLSubexpressionsWithJSONObjects(NSArray *objects) {
             } else if ([function isEqualToString:@"noindex:"]) {
                 return self.arguments.firstObject.mgl_jsonExpressionObject;
             } else if ([function isEqualToString:@"mgl_interpolateWithCurveType:parameters:stops:"]) {
+                if (self.arguments.count < 3) {
+                    [NSException raise:NSInvalidArgumentException format:
+                     @"Too few arguments to ‘mgl_interpolateWithCurveType:parameters:stops:’ function; expected 3 arguments."];
+                } else if (self.arguments.count > 3) {
+                    [NSException raise:NSInvalidArgumentException format:
+                     @"%lu unexpected arguments to ‘mgl_interpolateWithCurveType:parameters:stops:’ function; expected 3 arguments.",
+                     self.arguments.count - 3];
+                }
                 NSString *curveType = self.arguments.firstObject.constantValue;
                 NSMutableArray *interpolationArray = [NSMutableArray arrayWithObject:curveType];
                 if ([curveType isEqualToString:@"exponential"]) {
