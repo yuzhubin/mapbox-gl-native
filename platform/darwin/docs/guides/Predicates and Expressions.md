@@ -9,7 +9,8 @@ Somewhat unusually, style layers also use expressions on their own.
 This document discusses the specific subset of the predicate and expression
 syntax supported by this SDK. For a more general introduction to predicates and
 expressions, consult the
-_[Predicate Programming Guide](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/Predicates/AdditionalChapters/Introduction.html)_in Apple developer documentation.
+_[Predicate Programming Guide](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/Predicates/AdditionalChapters/Introduction.html)_
+in Apple developer documentation.
 
 ## Using predicates to filter vector data
 
