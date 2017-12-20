@@ -45,7 +45,7 @@ ifeq ($(V), 1)
   export XCPRETTY
   NINJA_ARGS ?= -v
 else
-  export XCPRETTY ?= | xcpretty
+  export XCPRETTY ?= | tee $(shell pwd)/build/$(HOST_PLATFORM)/xcodebuild.log | xcpretty
   NINJA_ARGS ?=
 endif
 
