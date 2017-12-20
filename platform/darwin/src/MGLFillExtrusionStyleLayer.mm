@@ -194,7 +194,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getFillExtrusionOpacity();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultFillExtrusionOpacity());
+        propertyValue = self.rawLayer->getDefaultFillExtrusionOpacity();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -229,7 +229,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getFillExtrusionPattern();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<std::string, NSString *>().toExpression(self.rawLayer->getDefaultFillExtrusionPattern());
+        propertyValue = self.rawLayer->getDefaultFillExtrusionPattern();
     }
     return MGLStyleValueTransformer<std::string, NSString *>().toExpression(propertyValue);
 }
@@ -264,7 +264,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getFillExtrusionTranslate();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toExpression(self.rawLayer->getDefaultFillExtrusionTranslate());
+        propertyValue = self.rawLayer->getDefaultFillExtrusionTranslate();
     }
     return MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toExpression(propertyValue);
 }
@@ -306,7 +306,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getFillExtrusionTranslateAnchor();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLFillExtrusionTranslationAnchor>().toExpression(self.rawLayer->getDefaultFillExtrusionTranslateAnchor());
+        propertyValue = self.rawLayer->getDefaultFillExtrusionTranslateAnchor();
     }
     return MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLFillExtrusionTranslationAnchor>().toExpression(propertyValue);
 }

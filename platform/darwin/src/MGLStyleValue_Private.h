@@ -8,8 +8,8 @@
 #import "MGLTypes.h"
 
 #import "MGLConversion.h"
+#include <mbgl/style/conversion/property_value.hpp>
 #include <mbgl/style/conversion/data_driven_property_value.hpp>
-#include <mbgl/style/conversion.hpp>
 #import <mbgl/style/types.hpp>
 
 #import <mbgl/util/enum.hpp>
@@ -51,7 +51,8 @@ public:
     }
     
     /// Convert an mbgl data driven property value into an mgl style value
-    NSExpression *toExpression(const mbgl::style::DataDrivenPropertyValue<MBGLType> &mbglValue) {
+    template <typename MBGLEnum = MBGLType, typename MGLEnum = ObjCEnum>
+    NSExpression *toExpression(const mbgl::style::DataDrivenPropertyValue<MBGLEnum> &mbglValue) {
         PropertyExpressionEvaluator evaluator;
         return mbglValue.evaluate(evaluator);
     }
@@ -128,7 +129,7 @@ public:
         NSArray *jsonExpression = expression.mgl_jsonExpressionObject;
         
         mbgl::style::conversion::Error valueError;
-        auto value = mbgl::style::conversion::convert<mbgl::style::DataDrivenPropertyValue<MBGLType>>(
+        auto value = mbgl::style::conversion::convert<mbgl::style::PropertyValue<MBGLType>>(
             mbgl::style::conversion::makeConvertible(jsonExpression), valueError);
         if (!value) {
             [NSException raise:NSInvalidArgumentException

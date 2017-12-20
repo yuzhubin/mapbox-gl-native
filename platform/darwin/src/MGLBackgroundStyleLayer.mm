@@ -44,7 +44,7 @@
 
     auto propertyValue = self.rawLayer->getBackgroundColor();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::Color, MGLColor *>().toExpression(self.rawLayer->getDefaultBackgroundColor());
+        propertyValue = self.rawLayer->getDefaultBackgroundColor();
     }
     return MGLStyleValueTransformer<mbgl::Color, MGLColor *>().toExpression(propertyValue);
 }
@@ -79,7 +79,7 @@
 
     auto propertyValue = self.rawLayer->getBackgroundOpacity();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultBackgroundOpacity());
+        propertyValue = self.rawLayer->getDefaultBackgroundOpacity();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -114,7 +114,7 @@
 
     auto propertyValue = self.rawLayer->getBackgroundPattern();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<std::string, NSString *>().toExpression(self.rawLayer->getDefaultBackgroundPattern());
+        propertyValue = self.rawLayer->getDefaultBackgroundPattern();
     }
     return MGLStyleValueTransformer<std::string, NSString *>().toExpression(propertyValue);
 }

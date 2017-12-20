@@ -101,7 +101,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getLineCap();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::LineCapType, NSValue *, mbgl::style::LineCapType, MGLLineCap>().toExpression(self.rawLayer->getDefaultLineCap());
+        propertyValue = self.rawLayer->getDefaultLineCap();
     }
     return MGLStyleValueTransformer<mbgl::style::LineCapType, NSValue *, mbgl::style::LineCapType, MGLLineCap>().toExpression(propertyValue);
 }
@@ -135,7 +135,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getLineMiterLimit();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultLineMiterLimit());
+        propertyValue = self.rawLayer->getDefaultLineMiterLimit();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -152,7 +152,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getLineRoundLimit();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultLineRoundLimit());
+        propertyValue = self.rawLayer->getDefaultLineRoundLimit();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -241,7 +241,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getLineDasharray();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<std::vector<float>, NSArray<NSNumber *> *, float>().toExpression(self.rawLayer->getDefaultLineDasharray());
+        propertyValue = self.rawLayer->getDefaultLineDasharray();
     }
     return MGLStyleValueTransformer<std::vector<float>, NSArray<NSNumber *> *, float>().toExpression(propertyValue);
 }
@@ -388,7 +388,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getLinePattern();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<std::string, NSString *>().toExpression(self.rawLayer->getDefaultLinePattern());
+        propertyValue = self.rawLayer->getDefaultLinePattern();
     }
     return MGLStyleValueTransformer<std::string, NSString *>().toExpression(propertyValue);
 }
@@ -423,7 +423,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getLineTranslate();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toExpression(self.rawLayer->getDefaultLineTranslate());
+        propertyValue = self.rawLayer->getDefaultLineTranslate();
     }
     return MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toExpression(propertyValue);
 }
@@ -465,7 +465,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getLineTranslateAnchor();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLLineTranslationAnchor>().toExpression(self.rawLayer->getDefaultLineTranslateAnchor());
+        propertyValue = self.rawLayer->getDefaultLineTranslateAnchor();
     }
     return MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLLineTranslationAnchor>().toExpression(propertyValue);
 }

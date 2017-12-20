@@ -123,6 +123,8 @@ namespace mbgl {
 
 <% if (property["property-function"]) { -%>
     auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toDataDrivenPropertyValue(<%- objCName(property) %>);
+<% } else if (property.type == "enum") { -%>
+    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toPropertyValue(<%- objCName(property) %>);
 <% } else if (property.function == "piecewise-constant") { -%>
     auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toPropertyValue(<%- objCName(property) %>);
 <% } else { -%>
@@ -135,17 +137,10 @@ namespace mbgl {
     MGLAssertStyleLayerIsValid();
 
     auto propertyValue = self.rawLayer->get<%- camelize(originalPropertyName(property)) %>();
-<% if (property["property-function"]) { -%>
     if (propertyValue.isUndefined()) {
         propertyValue = self.rawLayer->getDefault<%- camelize(originalPropertyName(property)) %>();
     }
     return MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toExpression(propertyValue);
-<% } else { -%>
-    if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toExpression(self.rawLayer->getDefault<%- camelize(originalPropertyName(property)) %>());
-    }
-    return MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toExpression(propertyValue);
-<% } -%>
 }
 
 <% if (property.original) { -%>
@@ -168,6 +163,8 @@ namespace mbgl {
 
 <% if (property["property-function"]) { -%>
     auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toDataDrivenPropertyValue(<%- objCName(property) %>);
+<% } else if (property.type == "enum") { -%>
+    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toPropertyValue(<%- objCName(property) %>);
 <% } else if (property.function == "piecewise-constant") { -%>
     auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toPropertyValue(<%- objCName(property) %>);
 <% } else { -%>
@@ -180,17 +177,10 @@ namespace mbgl {
     MGLAssertStyleLayerIsValid();
 
     auto propertyValue = self.rawLayer->get<%- camelize(originalPropertyName(property)) %>();
-<% if (property["property-function"]) { -%>
     if (propertyValue.isUndefined()) {
         propertyValue = self.rawLayer->getDefault<%- camelize(originalPropertyName(property)) %>();
     }
     return MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toExpression(propertyValue);
-<% } else { -%>
-    if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toExpression(self.rawLayer->getDefault<%- camelize(originalPropertyName(property)) %>());
-    }
-    return MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toExpression(propertyValue);
-<% } -%>
 }
 <% if (property["transition"]) { -%>
 

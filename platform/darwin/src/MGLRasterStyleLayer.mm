@@ -51,7 +51,7 @@
 
     auto propertyValue = self.rawLayer->getRasterBrightnessMax();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultRasterBrightnessMax());
+        propertyValue = self.rawLayer->getDefaultRasterBrightnessMax();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -93,7 +93,7 @@
 
     auto propertyValue = self.rawLayer->getRasterBrightnessMin();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultRasterBrightnessMin());
+        propertyValue = self.rawLayer->getDefaultRasterBrightnessMin();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -135,7 +135,7 @@
 
     auto propertyValue = self.rawLayer->getRasterContrast();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultRasterContrast());
+        propertyValue = self.rawLayer->getDefaultRasterContrast();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -170,7 +170,7 @@
 
     auto propertyValue = self.rawLayer->getRasterFadeDuration();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultRasterFadeDuration());
+        propertyValue = self.rawLayer->getDefaultRasterFadeDuration();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -187,7 +187,7 @@
 
     auto propertyValue = self.rawLayer->getRasterHueRotate();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultRasterHueRotate());
+        propertyValue = self.rawLayer->getDefaultRasterHueRotate();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -229,7 +229,7 @@
 
     auto propertyValue = self.rawLayer->getRasterOpacity();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultRasterOpacity());
+        propertyValue = self.rawLayer->getDefaultRasterOpacity();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -264,7 +264,7 @@
 
     auto propertyValue = self.rawLayer->getRasterSaturation();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultRasterSaturation());
+        propertyValue = self.rawLayer->getDefaultRasterSaturation();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }

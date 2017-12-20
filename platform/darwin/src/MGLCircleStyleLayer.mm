@@ -204,7 +204,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getCirclePitchAlignment();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::AlignmentType, NSValue *, mbgl::style::AlignmentType, MGLCirclePitchAlignment>().toExpression(self.rawLayer->getDefaultCirclePitchAlignment());
+        propertyValue = self.rawLayer->getDefaultCirclePitchAlignment();
     }
     return MGLStyleValueTransformer<mbgl::style::AlignmentType, NSValue *, mbgl::style::AlignmentType, MGLCirclePitchAlignment>().toExpression(propertyValue);
 }
@@ -256,7 +256,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getCirclePitchScale();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::CirclePitchScaleType, NSValue *, mbgl::style::CirclePitchScaleType, MGLCircleScaleAlignment>().toExpression(self.rawLayer->getDefaultCirclePitchScale());
+        propertyValue = self.rawLayer->getDefaultCirclePitchScale();
     }
     return MGLStyleValueTransformer<mbgl::style::CirclePitchScaleType, NSValue *, mbgl::style::CirclePitchScaleType, MGLCircleScaleAlignment>().toExpression(propertyValue);
 }
@@ -385,7 +385,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getCircleTranslate();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toExpression(self.rawLayer->getDefaultCircleTranslate());
+        propertyValue = self.rawLayer->getDefaultCircleTranslate();
     }
     return MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toExpression(propertyValue);
 }
@@ -427,7 +427,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getCircleTranslateAnchor();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLCircleTranslationAnchor>().toExpression(self.rawLayer->getDefaultCircleTranslateAnchor());
+        propertyValue = self.rawLayer->getDefaultCircleTranslateAnchor();
     }
     return MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLCircleTranslationAnchor>().toExpression(propertyValue);
 }

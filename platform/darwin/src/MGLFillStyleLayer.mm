@@ -89,7 +89,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getFillAntialias();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(self.rawLayer->getDefaultFillAntialias());
+        propertyValue = self.rawLayer->getDefaultFillAntialias();
     }
     return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(propertyValue);
 }
@@ -218,7 +218,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getFillPattern();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<std::string, NSString *>().toExpression(self.rawLayer->getDefaultFillPattern());
+        propertyValue = self.rawLayer->getDefaultFillPattern();
     }
     return MGLStyleValueTransformer<std::string, NSString *>().toExpression(propertyValue);
 }
@@ -253,7 +253,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getFillTranslate();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toExpression(self.rawLayer->getDefaultFillTranslate());
+        propertyValue = self.rawLayer->getDefaultFillTranslate();
     }
     return MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toExpression(propertyValue);
 }
@@ -295,7 +295,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getFillTranslateAnchor();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLFillTranslationAnchor>().toExpression(self.rawLayer->getDefaultFillTranslateAnchor());
+        propertyValue = self.rawLayer->getDefaultFillTranslateAnchor();
     }
     return MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLFillTranslationAnchor>().toExpression(propertyValue);
 }

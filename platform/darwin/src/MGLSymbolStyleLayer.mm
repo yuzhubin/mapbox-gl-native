@@ -166,7 +166,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getIconAllowOverlap();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(self.rawLayer->getDefaultIconAllowOverlap());
+        propertyValue = self.rawLayer->getDefaultIconAllowOverlap();
     }
     return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(propertyValue);
 }
@@ -207,7 +207,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getIconIgnorePlacement();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(self.rawLayer->getDefaultIconIgnorePlacement());
+        propertyValue = self.rawLayer->getDefaultIconIgnorePlacement();
     }
     return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(propertyValue);
 }
@@ -272,7 +272,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getIconOptional();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(self.rawLayer->getDefaultIconOptional());
+        propertyValue = self.rawLayer->getDefaultIconOptional();
     }
     return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(propertyValue);
 }
@@ -289,7 +289,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getIconPadding();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultIconPadding());
+        propertyValue = self.rawLayer->getDefaultIconPadding();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -306,7 +306,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getIconPitchAlignment();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::AlignmentType, NSValue *, mbgl::style::AlignmentType, MGLIconPitchAlignment>().toExpression(self.rawLayer->getDefaultIconPitchAlignment());
+        propertyValue = self.rawLayer->getDefaultIconPitchAlignment();
     }
     return MGLStyleValueTransformer<mbgl::style::AlignmentType, NSValue *, mbgl::style::AlignmentType, MGLIconPitchAlignment>().toExpression(propertyValue);
 }
@@ -347,7 +347,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getIconRotationAlignment();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::AlignmentType, NSValue *, mbgl::style::AlignmentType, MGLIconRotationAlignment>().toExpression(self.rawLayer->getDefaultIconRotationAlignment());
+        propertyValue = self.rawLayer->getDefaultIconRotationAlignment();
     }
     return MGLStyleValueTransformer<mbgl::style::AlignmentType, NSValue *, mbgl::style::AlignmentType, MGLIconRotationAlignment>().toExpression(propertyValue);
 }
@@ -388,7 +388,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getIconTextFit();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::IconTextFitType, NSValue *, mbgl::style::IconTextFitType, MGLIconTextFit>().toExpression(self.rawLayer->getDefaultIconTextFit());
+        propertyValue = self.rawLayer->getDefaultIconTextFit();
     }
     return MGLStyleValueTransformer<mbgl::style::IconTextFitType, NSValue *, mbgl::style::IconTextFitType, MGLIconTextFit>().toExpression(propertyValue);
 }
@@ -405,7 +405,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getIconTextFitPadding();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<std::array<float, 4>, NSValue *>().toExpression(self.rawLayer->getDefaultIconTextFitPadding());
+        propertyValue = self.rawLayer->getDefaultIconTextFitPadding();
     }
     return MGLStyleValueTransformer<std::array<float, 4>, NSValue *>().toExpression(propertyValue);
 }
@@ -422,7 +422,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getIconKeepUpright();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(self.rawLayer->getDefaultIconKeepUpright());
+        propertyValue = self.rawLayer->getDefaultIconKeepUpright();
     }
     return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(propertyValue);
 }
@@ -446,7 +446,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getTextKeepUpright();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(self.rawLayer->getDefaultTextKeepUpright());
+        propertyValue = self.rawLayer->getDefaultTextKeepUpright();
     }
     return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(propertyValue);
 }
@@ -470,7 +470,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getTextMaxAngle();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultTextMaxAngle());
+        propertyValue = self.rawLayer->getDefaultTextMaxAngle();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -518,7 +518,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getSymbolAvoidEdges();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(self.rawLayer->getDefaultSymbolAvoidEdges());
+        propertyValue = self.rawLayer->getDefaultSymbolAvoidEdges();
     }
     return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(propertyValue);
 }
@@ -542,7 +542,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getSymbolPlacement();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::SymbolPlacementType, NSValue *, mbgl::style::SymbolPlacementType, MGLSymbolPlacement>().toExpression(self.rawLayer->getDefaultSymbolPlacement());
+        propertyValue = self.rawLayer->getDefaultSymbolPlacement();
     }
     return MGLStyleValueTransformer<mbgl::style::SymbolPlacementType, NSValue *, mbgl::style::SymbolPlacementType, MGLSymbolPlacement>().toExpression(propertyValue);
 }
@@ -559,7 +559,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getSymbolSpacing();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultSymbolSpacing());
+        propertyValue = self.rawLayer->getDefaultSymbolSpacing();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -600,7 +600,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getTextAllowOverlap();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(self.rawLayer->getDefaultTextAllowOverlap());
+        propertyValue = self.rawLayer->getDefaultTextAllowOverlap();
     }
     return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(propertyValue);
 }
@@ -689,7 +689,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getTextIgnorePlacement();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(self.rawLayer->getDefaultTextIgnorePlacement());
+        propertyValue = self.rawLayer->getDefaultTextIgnorePlacement();
     }
     return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(propertyValue);
 }
@@ -754,7 +754,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getTextLineHeight();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultTextLineHeight());
+        propertyValue = self.rawLayer->getDefaultTextLineHeight();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -788,7 +788,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getTextOptional();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(self.rawLayer->getDefaultTextOptional());
+        propertyValue = self.rawLayer->getDefaultTextOptional();
     }
     return MGLStyleValueTransformer<bool, NSNumber *>().toExpression(propertyValue);
 }
@@ -805,7 +805,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getTextPadding();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<float, NSNumber *>().toExpression(self.rawLayer->getDefaultTextPadding());
+        propertyValue = self.rawLayer->getDefaultTextPadding();
     }
     return MGLStyleValueTransformer<float, NSNumber *>().toExpression(propertyValue);
 }
@@ -822,7 +822,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getTextPitchAlignment();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::AlignmentType, NSValue *, mbgl::style::AlignmentType, MGLTextPitchAlignment>().toExpression(self.rawLayer->getDefaultTextPitchAlignment());
+        propertyValue = self.rawLayer->getDefaultTextPitchAlignment();
     }
     return MGLStyleValueTransformer<mbgl::style::AlignmentType, NSValue *, mbgl::style::AlignmentType, MGLTextPitchAlignment>().toExpression(propertyValue);
 }
@@ -863,7 +863,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getTextRotationAlignment();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::AlignmentType, NSValue *, mbgl::style::AlignmentType, MGLTextRotationAlignment>().toExpression(self.rawLayer->getDefaultTextRotationAlignment());
+        propertyValue = self.rawLayer->getDefaultTextRotationAlignment();
     }
     return MGLStyleValueTransformer<mbgl::style::AlignmentType, NSValue *, mbgl::style::AlignmentType, MGLTextRotationAlignment>().toExpression(propertyValue);
 }
@@ -1074,7 +1074,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getIconTranslate();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toExpression(self.rawLayer->getDefaultIconTranslate());
+        propertyValue = self.rawLayer->getDefaultIconTranslate();
     }
     return MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toExpression(propertyValue);
 }
@@ -1116,7 +1116,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getIconTranslateAnchor();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLIconTranslationAnchor>().toExpression(self.rawLayer->getDefaultIconTranslateAnchor());
+        propertyValue = self.rawLayer->getDefaultIconTranslateAnchor();
     }
     return MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLIconTranslationAnchor>().toExpression(propertyValue);
 }
@@ -1315,7 +1315,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getTextTranslate();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toExpression(self.rawLayer->getDefaultTextTranslate());
+        propertyValue = self.rawLayer->getDefaultTextTranslate();
     }
     return MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toExpression(propertyValue);
 }
@@ -1357,7 +1357,7 @@ namespace mbgl {
 
     auto propertyValue = self.rawLayer->getTextTranslateAnchor();
     if (propertyValue.isUndefined()) {
-        return MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLTextTranslationAnchor>().toExpression(self.rawLayer->getDefaultTextTranslateAnchor());
+        propertyValue = self.rawLayer->getDefaultTextTranslateAnchor();
     }
     return MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLTextTranslationAnchor>().toExpression(propertyValue);
 }
