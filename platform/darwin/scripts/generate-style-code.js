@@ -17,6 +17,9 @@ let spec = _.merge(require('../../../mapbox-gl-js/src/style-spec/reference/v8'),
 delete spec.layer.type.values.heatmap;
 delete spec.layer.type.values.hillshade;
 
+// https://github.com/mapbox/mapbox-gl-native/issues/10535
+spec.layout_symbol['text-font']['property-function'] = false;
+
 // Rename properties and keep `original` for use with setters and getters
 _.forOwn(cocoaConventions, function (properties, kind) {
     _.forOwn(properties, function (newName, oldName) {

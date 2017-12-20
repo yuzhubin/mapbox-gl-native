@@ -1101,7 +1101,7 @@
 
         NSExpression *constantExpression = [NSExpression expressionForConstantValue:@[@"Text Font", @"Tnof Txet"]];
         layer.textFontNames = constantExpression;
-        mbgl::style::DataDrivenPropertyValue<std::vector<std::string>> propertyValue = { { "Text Font", "Tnof Txet" } };
+        mbgl::style::PropertyValue<std::vector<std::string>> propertyValue = { { "Text Font", "Tnof Txet" } };
         XCTAssertEqual(rawLayer->getTextFont(), propertyValue,
                        @"Setting textFontNames to a constant value expression should update text-font.");
         XCTAssertEqualObjects(layer.textFontNames, constantExpression,
@@ -1128,6 +1128,12 @@
                       @"Unsetting textFontNames should return text-font to the default value.");
         XCTAssertEqualObjects(layer.textFontNames, defaultExpression,
                               @"textFontNames should return the default value after being unset.");
+
+        functionExpression = [NSExpression expressionForKeyPath:@"bogus"];
+        XCTAssertThrowsSpecificNamed(layer.textFontNames = functionExpression, NSException, NSInvalidArgumentException, @"MGLSymbolLayer should raise an exception if a camera-data expression is applied to a property that does not support key paths to feature attributes.");
+        functionExpression = [NSExpression expressionWithFormat:@"FUNCTION(bogus, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
+        functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_interpolateWithCurveType:parameters:stops:', 'linear', nil, %@)", @{@10: functionExpression}];
+        XCTAssertThrowsSpecificNamed(layer.textFontNames = functionExpression, NSException, NSInvalidArgumentException, @"MGLSymbolLayer should raise an exception if a camera-data expression is applied to a property that does not support key paths to feature attributes.");
     }
 
     // text-size

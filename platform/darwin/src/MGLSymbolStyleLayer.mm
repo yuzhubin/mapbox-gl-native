@@ -632,7 +632,7 @@ namespace mbgl {
 - (void)setTextFontNames:(NSExpression *)textFontNames {
     MGLAssertStyleLayerIsValid();
 
-    auto mbglValue = MGLStyleValueTransformer<std::vector<std::string>, NSArray<NSString *> *, std::string>().toDataDrivenPropertyValue(textFontNames);
+    auto mbglValue = MGLStyleValueTransformer<std::vector<std::string>, NSArray<NSString *> *, std::string>().toPropertyValue(textFontNames);
     self.rawLayer->setTextFont(mbglValue);
 }
 
