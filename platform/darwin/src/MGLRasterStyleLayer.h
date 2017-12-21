@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  ```swift
  let layer = MGLRasterStyleLayer(identifier: "clouds", source: source)
- layer.rasterOpacity = MGLStyleValue(rawValue: 0.5)
+ layer.rasterOpacity = NSExpression(forConstantValue: 0.5)
  mapView.style?.addLayer(layer)
  ```
  */

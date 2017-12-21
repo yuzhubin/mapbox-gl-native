@@ -332,12 +332,12 @@ typedef NS_ENUM(NSUInteger, MGLTextTranslationAnchor) {
  ```swift
  let layer = MGLSymbolStyleLayer(identifier: "coffeeshops", source: pois)
  layer.sourceLayerIdentifier = "pois"
- layer.iconImageName = MGLStyleValue(rawValue: "coffee")
- layer.iconScale = MGLStyleValue(rawValue: 0.5)
+ layer.iconImageName = NSExpression(forConstantValue: "coffee")
+ layer.iconScale = NSExpression(forConstantValue: 0.5)
  layer.text = NSExpression(forKeyPath: "name")
- layer.textTranslation = MGLStyleValue(rawValue: NSValue(cgVector: CGVector(dx: 10, dy: 0)))
- layer.textJustification = MGLStyleValue(rawValue: NSValue(mglTextJustification: .left))
- layer.textAnchor = MGLStyleValue(rawValue: NSValue(mglTextAnchor: .left))
+ layer.textTranslation = NSExpression(forConstantValue: NSValue(cgVector: CGVector(dx: 10, dy: 0)))
+ layer.textJustification = NSExpression(forConstantValue: "left")
+ layer.textAnchor = NSExpression(forConstantValue: "left")
  layer.predicate = NSPredicate(format: "%K == %@", "venue-type", "coffee")
  mapView.style?.addLayer(layer)
  ```
