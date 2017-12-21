@@ -1,9 +1,12 @@
 #import <XCTest/XCTest.h>
 
+#import "MGLStyleLayerTests.h"
+
 #import <string>
 
 #import "MGLTypes.h"
 #import "NSExpression+MGLAdditions.h"
+#import "NSValue+MGLAdditions.h"
 #if TARGET_OS_IPHONE
 #import "UIColor+MGLAdditions.h"
 #else
@@ -21,9 +24,6 @@
     if (actual.is<__typeof__(expected)>()) { \
         XCTAssertEqualWithAccuracy(actual.get<__typeof__(expected)>(), expected, accuracy, __VA_ARGS__); \
     }
-
-#define MGLConstantExpression(constant) \
-    [NSExpression expressionForConstantValue:constant]
 
 #define MGLAssertConstantEqualsValue(constant, value, ...) \
     MGLAssertEqualValues(MGLConstantExpression(constant).mgl_constantMBGLValue, value, __VA_ARGS__);
@@ -187,6 +187,13 @@ using namespace std::string_literals;
 
 - (void)testConstantValueExpressionObject {
     {
+        NSExpression *expression = [NSExpression expressionForConstantValue:nil];
+        XCTAssert(expression.mgl_jsonExpressionObject == [NSNull null]);
+        XCTAssert([NSExpression expressionWithFormat:@"nil"].mgl_jsonExpressionObject == [NSNull null]);
+        XCTAssertEqualObjects([NSExpression mgl_expressionWithJSONObject:[NSNull null]], expression);
+        XCTAssertNil([expression expressionValueWithObject:nil context:nil]);
+    }
+    {
         NSExpression *expression = [NSExpression expressionForConstantValue:@1];
         XCTAssertEqualObjects(expression.mgl_jsonExpressionObject, @1);
         XCTAssertEqualObjects([NSExpression expressionWithFormat:@"1"].mgl_jsonExpressionObject, @1);
@@ -201,11 +208,32 @@ using namespace std::string_literals;
         XCTAssertEqualObjects([expression expressionValueWithObject:nil context:nil], @YES);
     }
     {
-        NSExpression *expression = [NSExpression expressionForConstantValue:nil];
-        XCTAssert(expression.mgl_jsonExpressionObject == [NSNull null]);
-        XCTAssert([NSExpression expressionWithFormat:@"nil"].mgl_jsonExpressionObject == [NSNull null]);
-        XCTAssertEqualObjects([NSExpression mgl_expressionWithJSONObject:[NSNull null]], expression);
-        XCTAssertNil([expression expressionValueWithObject:nil context:nil]);
+        CGVector vector = CGVectorMake(1, 2);
+        NSExpression *expression = [NSExpression expressionForConstantValue:@(vector)];
+#if !TARGET_OS_IPHONE
+        NSArray *jsonExpression = @[@"literal", @[@1, @-2]];
+#else
+        NSArray *jsonExpression = @[@"literal", @[@1, @2]];
+#endif
+        XCTAssertEqualObjects(expression.mgl_jsonExpressionObject, jsonExpression);
+        // No way to distinguish offsets from ordinary arrays in expressions.
+        XCTAssertEqualObjects([[NSExpression mgl_expressionWithJSONObject:jsonExpression].collection valueForKeyPath:@"constantValue"], jsonExpression.lastObject);
+        XCTAssertEqualObjects([expression expressionValueWithObject:nil context:nil], @(vector));
+    }
+    {
+#if !TARGET_OS_IPHONE
+        NSEdgeInsets padding = {1, 2, 3, 4};
+        NSValue *value = [NSValue valueWithEdgeInsets:padding];
+#else
+        UIEdgeInsets padding = {1, 2, 3, 4};
+        NSValue *value = [NSValue valueWithUIEdgeInsets:padding];
+#endif
+        NSExpression *expression = [NSExpression expressionForConstantValue:value];
+        NSArray *jsonExpression = @[@"literal", @[@1, @4, @3, @2]];
+        XCTAssertEqualObjects(expression.mgl_jsonExpressionObject, jsonExpression);
+        // No way to distinguish offsets from ordinary arrays in expressions.
+        XCTAssertEqualObjects([[NSExpression mgl_expressionWithJSONObject:jsonExpression].collection valueForKeyPath:@"constantValue"], jsonExpression.lastObject);
+        XCTAssertEqualObjects([expression expressionValueWithObject:nil context:nil], value);
     }
     {
         MGLColor *color = [MGLColor mgl_colorWithColor:{ 255.0/255, 239.0/255, 213.0/255, 1 }]; // papayawhip
