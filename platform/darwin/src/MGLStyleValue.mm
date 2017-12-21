@@ -6,27 +6,39 @@ const MGLStyleFunctionOption MGLStyleFunctionOptionInterpolationBase = @"MGLStyl
 const MGLStyleFunctionOption MGLStyleFunctionOptionDefaultValue = @"MGLStyleFunctionOptionDefaultValue";
 
 id MGLJSONObjectFromMBGLValue(const mbgl::style::expression::Value &value) {
-    if (value.is<mbgl::NullValue>()) {
+    return value.match([](const mbgl::NullValue) -> id {
         return [NSNull null];
-    }
-    if (value.is<bool>()) {
-        return @(value.get<bool>());
-    }
-    if (value.is<double>()) {
-        return @(value.get<double>());
-    }
-    if (value.is<std::string>()) {
-        return @(value.get<std::string>().c_str());
-    }
-    if (value.is<std::vector<mbgl::style::expression::Value>>()) {
-        auto vector = value.get<std::vector<mbgl::style::expression::Value>>();
-        NSMutableArray *inputs = [NSMutableArray arrayWithCapacity:vector.size()];
+    }, [](const bool value) {
+        return @(value);
+    }, [](const float value) {
+        return @(value);
+    }, [](const int64_t value) {
+        return @(value);
+    }, [](const double value) {
+        return @(value);
+    }, [](const std::string &value) {
+        return @(value.c_str());
+    }, [](const mbgl::Color &value) {
+        return [MGLColor mgl_colorWithColor:value];
+    }, [](const mbgl::style::Position &value) {
+        std::array<float, 3> spherical = value.getSpherical();
+        MGLSphericalPosition position = MGLSphericalPositionMake(spherical[0], spherical[1], spherical[2]);
+        return [NSValue valueWithMGLSphericalPosition:position];
+    }, [&](const std::vector<mbgl::style::expression::Value> &vector) {
+        NSMutableArray *array = [NSMutableArray arrayWithCapacity:vector.size()];
         for (auto value : vector) {
-            [inputs addObject:MGLJSONObjectFromMBGLValue(value)];
+            [array addObject:MGLJSONObjectFromMBGLValue(value)];
         }
-        return @[];
-    }
-    return nil;
+        return @[@"literal", array];
+    }, [&](const std::unordered_map<std::string, mbgl::style::expression::Value> &map) {
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity:map.size()];
+        for (auto &item : map) {
+            dictionary[@(item.first.c_str())] = MGLJSONObjectFromMBGLValue(item.second);
+        }
+        return @[@"literal", dictionary];
+    }, [](const auto &) -> id {
+        return nil;
+    });
 }
 
 id MGLJSONObjectFromMBGLExpression(const mbgl::style::expression::Expression &mbglExpression) {
