@@ -166,20 +166,17 @@ class MGLDocumentationGuideTests: XCTestCase, MGLMapViewDelegate {
         
         //#-example-code
         #if os(macOS)
-            let colors: [String: NSColor] = [
-                "earthquake": .orange,
-                "explosion": .red,
-                "quarry blast": .yellow,
-            ]
+            let colors: [NSColor] = [.orange, .red, .yellow, .blue]
         #else
-            let colors: [String: UIColor] = [
-                "earthquake": .orange,
-                "explosion": .red,
-                "quarry blast": .yellow,
-            ]
+            let colors: [UIColor] = [.orange, .red, .yellow, .blue]
         #endif
         
-        layer.circleColor = NSExpression(format: "%@.(type)", colors)
+        layer.circleColor = NSExpression(format:
+            "TERNARY(FUNCTION(type, 'stringValue') = 'earthquake', %@, " +
+            "TERNARY(FUNCTION(type, 'stringValue') = 'explosion', %@, " +
+            "TERNARY(FUNCTION(type, 'stringValue') = 'quarry blast', %@, " +
+            "%@)))",
+                                         argumentArray: colors)
         //#-end-example-code
     }
     

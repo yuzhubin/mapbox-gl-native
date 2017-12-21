@@ -124,13 +124,14 @@ At each stop, `MGLInterpolationModeCategorical` produces an output value equal t
 There are three main types of events in the dataset: earthquakes, explosions, and quarry blasts. In this case, the color of the circle layer will be determined by the type of event, with a default value of blue to catch any events that do not fall into any of those categories.
 
 ```swift
-let colors: [String: NSColor] = [
-    "earthquake": .orange,
-    "explosion": .red,
-    "quarry blast": .yellow,
-]
+let colors: [NSColor] = [.orange, .red, .yellow, .blue]
 
-layer.circleColor = NSExpression(format: "%@.(type)", colors)
+layer.circleColor = NSExpression(format:
+    "TERNARY(FUNCTION(type, 'stringValue') = 'earthquake', %@, " +
+    "TERNARY(FUNCTION(type, 'stringValue') = 'explosion', %@, " +
+    "TERNARY(FUNCTION(type, 'stringValue') = 'quarry blast', %@, " +
+    "%@)))",
+                                 argumentArray: colors)
 ```
 
 ![categorical mode](img/data-driven-styling/categorical1.png) ![categorical mode](img/data-driven-styling/categorical2.png)
