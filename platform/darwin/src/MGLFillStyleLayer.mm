@@ -80,7 +80,7 @@ namespace mbgl {
 - (void)setFillAntialiased:(NSExpression *)fillAntialiased {
     MGLAssertStyleLayerIsValid();
 
-    auto mbglValue = MGLStyleValueTransformer<bool, NSNumber *>().toPropertyValue(fillAntialiased);
+    auto mbglValue = MGLStyleValueTransformer<bool, NSNumber *>().toPropertyValue<mbgl::style::PropertyValue<bool>>(fillAntialiased);
     self.rawLayer->setFillAntialias(mbglValue);
 }
 
@@ -104,7 +104,7 @@ namespace mbgl {
 - (void)setFillColor:(NSExpression *)fillColor {
     MGLAssertStyleLayerIsValid();
 
-    auto mbglValue = MGLStyleValueTransformer<mbgl::Color, MGLColor *>().toDataDrivenPropertyValue(fillColor);
+    auto mbglValue = MGLStyleValueTransformer<mbgl::Color, MGLColor *>().toPropertyValue<mbgl::style::DataDrivenPropertyValue<mbgl::Color>>(fillColor);
     self.rawLayer->setFillColor(mbglValue);
 }
 
@@ -139,7 +139,7 @@ namespace mbgl {
 - (void)setFillOpacity:(NSExpression *)fillOpacity {
     MGLAssertStyleLayerIsValid();
 
-    auto mbglValue = MGLStyleValueTransformer<float, NSNumber *>().toDataDrivenPropertyValue(fillOpacity);
+    auto mbglValue = MGLStyleValueTransformer<float, NSNumber *>().toPropertyValue<mbgl::style::DataDrivenPropertyValue<float>>(fillOpacity);
     self.rawLayer->setFillOpacity(mbglValue);
 }
 
@@ -174,7 +174,7 @@ namespace mbgl {
 - (void)setFillOutlineColor:(NSExpression *)fillOutlineColor {
     MGLAssertStyleLayerIsValid();
 
-    auto mbglValue = MGLStyleValueTransformer<mbgl::Color, MGLColor *>().toDataDrivenPropertyValue(fillOutlineColor);
+    auto mbglValue = MGLStyleValueTransformer<mbgl::Color, MGLColor *>().toPropertyValue<mbgl::style::DataDrivenPropertyValue<mbgl::Color>>(fillOutlineColor);
     self.rawLayer->setFillOutlineColor(mbglValue);
 }
 
@@ -209,7 +209,7 @@ namespace mbgl {
 - (void)setFillPattern:(NSExpression *)fillPattern {
     MGLAssertStyleLayerIsValid();
 
-    auto mbglValue = MGLStyleValueTransformer<std::string, NSString *>().toPropertyValue(fillPattern);
+    auto mbglValue = MGLStyleValueTransformer<std::string, NSString *>().toPropertyValue<mbgl::style::PropertyValue<std::string>>(fillPattern);
     self.rawLayer->setFillPattern(mbglValue);
 }
 
@@ -244,7 +244,7 @@ namespace mbgl {
 - (void)setFillTranslation:(NSExpression *)fillTranslation {
     MGLAssertStyleLayerIsValid();
 
-    auto mbglValue = MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toInterpolatablePropertyValue(fillTranslation);
+    auto mbglValue = MGLStyleValueTransformer<std::array<float, 2>, NSValue *>().toPropertyValue<mbgl::style::PropertyValue<std::array<float, 2>>>(fillTranslation);
     self.rawLayer->setFillTranslate(mbglValue);
 }
 
@@ -286,7 +286,7 @@ namespace mbgl {
 - (void)setFillTranslationAnchor:(NSExpression *)fillTranslationAnchor {
     MGLAssertStyleLayerIsValid();
 
-    auto mbglValue = MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLFillTranslationAnchor>().toPropertyValue(fillTranslationAnchor);
+    auto mbglValue = MGLStyleValueTransformer<mbgl::style::TranslateAnchorType, NSValue *, mbgl::style::TranslateAnchorType, MGLFillTranslationAnchor>().toPropertyValue<mbgl::style::PropertyValue<mbgl::style::TranslateAnchorType>>(fillTranslationAnchor);
     self.rawLayer->setFillTranslateAnchor(mbglValue);
 }
 

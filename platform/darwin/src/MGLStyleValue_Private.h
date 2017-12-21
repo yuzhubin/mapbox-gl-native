@@ -74,9 +74,14 @@ public:
     }
     
     /**
-     Converts an NSExpression to a non-interpolatable mbgl property value.
+     Converts an NSExpression to an mbgl property value.
      */
-    mbgl::style::PropertyValue<MBGLType> toPropertyValue(NSExpression *expression) {
+    template <typename MBGLValue>
+    MBGLValue toPropertyValue(NSExpression *expression) {
+        if (!expression) {
+            return {};
+        }
+        
         if (expression.expressionType == NSConstantValueExpressionType) {
             MBGLType mbglValue;
             getMBGLValue(expression.constantValue, mbglValue);
@@ -86,7 +91,7 @@ public:
         NSArray *jsonExpression = expression.mgl_jsonExpressionObject;
         
         mbgl::style::conversion::Error valueError;
-        auto value = mbgl::style::conversion::convert<mbgl::style::PropertyValue<MBGLType>>(
+        auto value = mbgl::style::conversion::convert<MBGLValue>(
             mbgl::style::conversion::makeConvertible(jsonExpression), valueError);
         if (!value) {
             [NSException raise:NSInvalidArgumentException
@@ -127,30 +132,6 @@ public:
             return {};
         }
     }
-    
-    /**
-     Converts an NSExpression to an interpolatable mbgl property value.
-     */
-    mbgl::style::PropertyValue<MBGLType> toInterpolatablePropertyValue(NSExpression *expression) {
-        if (expression.expressionType == NSConstantValueExpressionType) {
-            MBGLType mbglValue;
-            getMBGLValue(expression.constantValue, mbglValue);
-            return mbglValue;
-        }
-        
-        NSArray *jsonExpression = expression.mgl_jsonExpressionObject;
-        
-        mbgl::style::conversion::Error valueError;
-        auto value = mbgl::style::conversion::convert<mbgl::style::PropertyValue<MBGLType>>(
-            mbgl::style::conversion::makeConvertible(jsonExpression), valueError);
-        if (!value) {
-            [NSException raise:NSInvalidArgumentException
-                        format:@"Invalid property value: %@", @(valueError.message.c_str())];
-            return {};
-        }
-        
-        return *value;
-    }
 
     /// Convert an mgl style value into an interpolatable (camera with exponential or interval stops) mbgl property value
     mbgl::style::PropertyValue<MBGLType> toInterpolatablePropertyValue(MGLStyleValue<ObjCType> *value) {
@@ -189,30 +170,6 @@ public:
         } else {
             return {};
         }
-    }
-    
-    /**
-     Converts an NSExpression to a data-driven mbgl property value.
-     */
-    mbgl::style::DataDrivenPropertyValue<MBGLType> toDataDrivenPropertyValue(NSExpression *expression) {
-        if (expression.expressionType == NSConstantValueExpressionType) {
-            MBGLType mbglValue;
-            getMBGLValue(expression.constantValue, mbglValue);
-            return mbglValue;
-        }
-        
-        NSArray *jsonExpression = expression.mgl_jsonExpressionObject;
-        
-        mbgl::style::conversion::Error valueError;
-        auto value = mbgl::style::conversion::convert<mbgl::style::DataDrivenPropertyValue<MBGLType>>(
-            mbgl::style::conversion::makeConvertible(jsonExpression), valueError);
-        if (!value) {
-            [NSException raise:NSInvalidArgumentException
-                        format:@"Invalid property value: %@", @(valueError.message.c_str())];
-            return {};
-        }
-        
-        return *value;
     }
 
     /// Convert an mgl style value into a mbgl data-driven property value

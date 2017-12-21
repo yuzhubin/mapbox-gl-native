@@ -122,13 +122,9 @@ namespace mbgl {
     MGLAssertStyleLayerIsValid();
 
 <% if (property["property-function"]) { -%>
-    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toDataDrivenPropertyValue(<%- objCName(property) %>);
-<% } else if (property.type == "enum") { -%>
-    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toPropertyValue(<%- objCName(property) %>);
-<% } else if (property.function == "piecewise-constant") { -%>
-    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toPropertyValue(<%- objCName(property) %>);
+    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toPropertyValue<mbgl::style::DataDrivenPropertyValue<<%- valueTransformerArguments(property)[0] %>>>(<%- objCName(property) %>);
 <% } else { -%>
-    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toInterpolatablePropertyValue(<%- objCName(property) %>);
+    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toPropertyValue<mbgl::style::PropertyValue<<%- valueTransformerArguments(property)[0] %>>>(<%- objCName(property) %>);
 <% } -%>
     self.rawLayer->set<%- camelize(originalPropertyName(property)) %>(mbglValue);
 }
@@ -162,13 +158,9 @@ namespace mbgl {
     MGLAssertStyleLayerIsValid();
 
 <% if (property["property-function"]) { -%>
-    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toDataDrivenPropertyValue(<%- objCName(property) %>);
-<% } else if (property.type == "enum") { -%>
-    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toPropertyValue(<%- objCName(property) %>);
-<% } else if (property.function == "piecewise-constant") { -%>
-    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toPropertyValue(<%- objCName(property) %>);
+    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toPropertyValue<mbgl::style::DataDrivenPropertyValue<<%- valueTransformerArguments(property)[0] %>>>(<%- objCName(property) %>);
 <% } else { -%>
-    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toInterpolatablePropertyValue(<%- objCName(property) %>);
+    auto mbglValue = MGLStyleValueTransformer<<%- valueTransformerArguments(property).join(', ') %>>().toPropertyValue<mbgl::style::PropertyValue<<%- valueTransformerArguments(property)[0] %>>>(<%- objCName(property) %>);
 <% } -%>
     self.rawLayer->set<%- camelize(originalPropertyName(property)) %>(mbglValue);
 }
