@@ -298,17 +298,17 @@
 }
 
 - (void)testShapeCollectionFeatureGeoJSONDictionary {
-    MGLPointFeature *pointFeature = [[MGLPointFeature alloc] init];
+    MGLPointAnnotation *pointFeature = [[MGLPointAnnotation alloc] init];
     CLLocationCoordinate2D pointCoordinate = { 10, 10 };
     pointFeature.coordinate = pointCoordinate;
 
     CLLocationCoordinate2D coord1 = { 0, 0 };
     CLLocationCoordinate2D coord2 = { 10, 10 };
     CLLocationCoordinate2D coords[] = { coord1, coord2 };
-    MGLPolylineFeature *polyline = [MGLPolylineFeature polylineWithCoordinates:coords count:2];
+    MGLPolyline *polyline = [MGLPolyline polylineWithCoordinates:coords count:2];
 
     MGLShapeCollectionFeature *shapeCollectionFeature = [MGLShapeCollectionFeature shapeCollectionWithShapes:@[pointFeature,
-                                                                                                               polyline]];
+                                                                                                             polyline]];
     // A GeoJSON feature
     NSDictionary *geoJSONFeature = [shapeCollectionFeature geoJSONDictionary];
 
