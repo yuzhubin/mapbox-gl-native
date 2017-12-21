@@ -54,7 +54,7 @@
                       @"fill-extrusion-base should be unset initially.");
         NSExpression *defaultExpression = layer.fillExtrusionBase;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.fillExtrusionBase = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getFillExtrusionBase(), propertyValue,
@@ -62,6 +62,7 @@
         XCTAssertEqualObjects(layer.fillExtrusionBase, constantExpression,
                               @"fillExtrusionBase should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillExtrusionBase = functionExpression;
 
@@ -123,7 +124,7 @@
                       @"fill-extrusion-color should be unset initially.");
         NSExpression *defaultExpression = layer.fillExtrusionColor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[MGLColor redColor]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         layer.fillExtrusionColor = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::Color> propertyValue = { { 1, 0, 0, 1 } };
         XCTAssertEqual(rawLayer->getFillExtrusionColor(), propertyValue,
@@ -131,6 +132,7 @@
         XCTAssertEqualObjects(layer.fillExtrusionColor, constantExpression,
                               @"fillExtrusionColor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillExtrusionColor = functionExpression;
 
@@ -192,7 +194,7 @@
                       @"fill-extrusion-height should be unset initially.");
         NSExpression *defaultExpression = layer.fillExtrusionHeight;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.fillExtrusionHeight = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getFillExtrusionHeight(), propertyValue,
@@ -200,6 +202,7 @@
         XCTAssertEqualObjects(layer.fillExtrusionHeight, constantExpression,
                               @"fillExtrusionHeight should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillExtrusionHeight = functionExpression;
 
@@ -261,7 +264,7 @@
                       @"fill-extrusion-opacity should be unset initially.");
         NSExpression *defaultExpression = layer.fillExtrusionOpacity;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.fillExtrusionOpacity = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getFillExtrusionOpacity(), propertyValue,
@@ -269,6 +272,7 @@
         XCTAssertEqualObjects(layer.fillExtrusionOpacity, constantExpression,
                               @"fillExtrusionOpacity should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillExtrusionOpacity = functionExpression;
 
@@ -313,7 +317,7 @@
                       @"fill-extrusion-pattern should be unset initially.");
         NSExpression *defaultExpression = layer.fillExtrusionPattern;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@"Fill Extrusion Pattern"];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'Fill Extrusion Pattern'"];
         layer.fillExtrusionPattern = constantExpression;
         mbgl::style::PropertyValue<std::string> propertyValue = { "Fill Extrusion Pattern" };
         XCTAssertEqual(rawLayer->getFillExtrusionPattern(), propertyValue,
@@ -321,6 +325,7 @@
         XCTAssertEqualObjects(layer.fillExtrusionPattern, constantExpression,
                               @"fillExtrusionPattern should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'Fill Extrusion Pattern'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillExtrusionPattern = functionExpression;
 
@@ -365,7 +370,7 @@
                       @"fill-extrusion-translate should be unset initially.");
         NSExpression *defaultExpression = layer.fillExtrusionTranslation;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@",
 #if TARGET_OS_IPHONE
             [NSValue valueWithCGVector:CGVectorMake(1, 1)]
 #else
@@ -379,6 +384,7 @@
         XCTAssertEqualObjects(layer.fillExtrusionTranslation, constantExpression,
                               @"fillExtrusionTranslation should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"{1, 1}"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillExtrusionTranslation = functionExpression;
 
@@ -414,7 +420,7 @@
                       @"fill-extrusion-translate-anchor should be unset initially.");
         NSExpression *defaultExpression = layer.fillExtrusionTranslationAnchor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLFillExtrusionTranslationAnchor:MGLFillExtrusionTranslationAnchorViewport]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         layer.fillExtrusionTranslationAnchor = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::TranslateAnchorType> propertyValue = { mbgl::style::TranslateAnchorType::Viewport };
         XCTAssertEqual(rawLayer->getFillExtrusionTranslateAnchor(), propertyValue,
@@ -422,6 +428,7 @@
         XCTAssertEqualObjects(layer.fillExtrusionTranslationAnchor, constantExpression,
                               @"fillExtrusionTranslationAnchor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillExtrusionTranslationAnchor = functionExpression;
 

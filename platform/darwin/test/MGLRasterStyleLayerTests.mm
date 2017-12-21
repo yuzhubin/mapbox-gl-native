@@ -36,7 +36,7 @@
                       @"raster-brightness-max should be unset initially.");
         NSExpression *defaultExpression = layer.maximumRasterBrightness;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.maximumRasterBrightness = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getRasterBrightnessMax(), propertyValue,
@@ -44,6 +44,7 @@
         XCTAssertEqualObjects(layer.maximumRasterBrightness, constantExpression,
                               @"maximumRasterBrightness should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.maximumRasterBrightness = functionExpression;
 
@@ -79,7 +80,7 @@
                       @"raster-brightness-min should be unset initially.");
         NSExpression *defaultExpression = layer.minimumRasterBrightness;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.minimumRasterBrightness = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getRasterBrightnessMin(), propertyValue,
@@ -87,6 +88,7 @@
         XCTAssertEqualObjects(layer.minimumRasterBrightness, constantExpression,
                               @"minimumRasterBrightness should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.minimumRasterBrightness = functionExpression;
 
@@ -122,7 +124,7 @@
                       @"raster-contrast should be unset initially.");
         NSExpression *defaultExpression = layer.rasterContrast;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.rasterContrast = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getRasterContrast(), propertyValue,
@@ -130,6 +132,7 @@
         XCTAssertEqualObjects(layer.rasterContrast, constantExpression,
                               @"rasterContrast should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.rasterContrast = functionExpression;
 
@@ -174,7 +177,7 @@
                       @"raster-fade-duration should be unset initially.");
         NSExpression *defaultExpression = layer.rasterFadeDuration;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.rasterFadeDuration = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getRasterFadeDuration(), propertyValue,
@@ -182,6 +185,7 @@
         XCTAssertEqualObjects(layer.rasterFadeDuration, constantExpression,
                               @"rasterFadeDuration should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.rasterFadeDuration = functionExpression;
 
@@ -217,7 +221,7 @@
                       @"raster-hue-rotate should be unset initially.");
         NSExpression *defaultExpression = layer.rasterHueRotation;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.rasterHueRotation = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getRasterHueRotate(), propertyValue,
@@ -225,6 +229,7 @@
         XCTAssertEqualObjects(layer.rasterHueRotation, constantExpression,
                               @"rasterHueRotation should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.rasterHueRotation = functionExpression;
 
@@ -260,7 +265,7 @@
                       @"raster-opacity should be unset initially.");
         NSExpression *defaultExpression = layer.rasterOpacity;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.rasterOpacity = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getRasterOpacity(), propertyValue,
@@ -268,6 +273,7 @@
         XCTAssertEqualObjects(layer.rasterOpacity, constantExpression,
                               @"rasterOpacity should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.rasterOpacity = functionExpression;
 
@@ -312,7 +318,7 @@
                       @"raster-saturation should be unset initially.");
         NSExpression *defaultExpression = layer.rasterSaturation;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.rasterSaturation = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getRasterSaturation(), propertyValue,
@@ -320,6 +326,7 @@
         XCTAssertEqualObjects(layer.rasterSaturation, constantExpression,
                               @"rasterSaturation should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.rasterSaturation = functionExpression;
 

@@ -54,7 +54,7 @@
                       @"icon-allow-overlap should be unset initially.");
         NSExpression *defaultExpression = layer.iconAllowsOverlap;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@YES];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"true"];
         layer.iconAllowsOverlap = constantExpression;
         mbgl::style::PropertyValue<bool> propertyValue = { true };
         XCTAssertEqual(rawLayer->getIconAllowOverlap(), propertyValue,
@@ -62,6 +62,7 @@
         XCTAssertEqualObjects(layer.iconAllowsOverlap, constantExpression,
                               @"iconAllowsOverlap should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"true"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconAllowsOverlap = functionExpression;
 
@@ -97,7 +98,7 @@
                       @"icon-anchor should be unset initially.");
         NSExpression *defaultExpression = layer.iconAnchor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLIconAnchor:MGLIconAnchorBottomRight]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'bottom-right'"];
         layer.iconAnchor = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::style::SymbolAnchorType> propertyValue = { mbgl::style::SymbolAnchorType::BottomRight };
         XCTAssertEqual(rawLayer->getIconAnchor(), propertyValue,
@@ -105,6 +106,7 @@
         XCTAssertEqualObjects(layer.iconAnchor, constantExpression,
                               @"iconAnchor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'bottom-right'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconAnchor = functionExpression;
 
@@ -134,7 +136,7 @@
                       @"icon-ignore-placement should be unset initially.");
         NSExpression *defaultExpression = layer.iconIgnoresPlacement;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@YES];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"true"];
         layer.iconIgnoresPlacement = constantExpression;
         mbgl::style::PropertyValue<bool> propertyValue = { true };
         XCTAssertEqual(rawLayer->getIconIgnorePlacement(), propertyValue,
@@ -142,6 +144,7 @@
         XCTAssertEqualObjects(layer.iconIgnoresPlacement, constantExpression,
                               @"iconIgnoresPlacement should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"true"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconIgnoresPlacement = functionExpression;
 
@@ -177,7 +180,7 @@
                       @"icon-image should be unset initially.");
         NSExpression *defaultExpression = layer.iconImageName;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@"Icon Image"];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'Icon Image'"];
         layer.iconImageName = constantExpression;
         mbgl::style::DataDrivenPropertyValue<std::string> propertyValue = { "Icon Image" };
         XCTAssertEqual(rawLayer->getIconImage(), propertyValue,
@@ -185,6 +188,7 @@
         XCTAssertEqualObjects(layer.iconImageName, constantExpression,
                               @"iconImageName should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'Icon Image'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconImageName = functionExpression;
 
@@ -214,7 +218,7 @@
                       @"icon-offset should be unset initially.");
         NSExpression *defaultExpression = layer.iconOffset;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@",
 #if TARGET_OS_IPHONE
             [NSValue valueWithCGVector:CGVectorMake(1, 1)]
 #else
@@ -228,6 +232,7 @@
         XCTAssertEqualObjects(layer.iconOffset, constantExpression,
                               @"iconOffset should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"{1, 1}"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconOffset = functionExpression;
 
@@ -280,7 +285,7 @@
                       @"icon-optional should be unset initially.");
         NSExpression *defaultExpression = layer.iconOptional;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@YES];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"true"];
         layer.iconOptional = constantExpression;
         mbgl::style::PropertyValue<bool> propertyValue = { true };
         XCTAssertEqual(rawLayer->getIconOptional(), propertyValue,
@@ -288,6 +293,7 @@
         XCTAssertEqualObjects(layer.iconOptional, constantExpression,
                               @"iconOptional should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"true"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconOptional = functionExpression;
 
@@ -323,7 +329,7 @@
                       @"icon-padding should be unset initially.");
         NSExpression *defaultExpression = layer.iconPadding;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.iconPadding = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getIconPadding(), propertyValue,
@@ -331,6 +337,7 @@
         XCTAssertEqualObjects(layer.iconPadding, constantExpression,
                               @"iconPadding should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconPadding = functionExpression;
 
@@ -366,7 +373,7 @@
                       @"icon-pitch-alignment should be unset initially.");
         NSExpression *defaultExpression = layer.iconPitchAlignment;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLIconPitchAlignment:MGLIconPitchAlignmentAuto]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'auto'"];
         layer.iconPitchAlignment = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::AlignmentType> propertyValue = { mbgl::style::AlignmentType::Auto };
         XCTAssertEqual(rawLayer->getIconPitchAlignment(), propertyValue,
@@ -374,6 +381,7 @@
         XCTAssertEqualObjects(layer.iconPitchAlignment, constantExpression,
                               @"iconPitchAlignment should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'auto'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconPitchAlignment = functionExpression;
 
@@ -409,7 +417,7 @@
                       @"icon-rotate should be unset initially.");
         NSExpression *defaultExpression = layer.iconRotation;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.iconRotation = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getIconRotate(), propertyValue,
@@ -417,6 +425,7 @@
         XCTAssertEqualObjects(layer.iconRotation, constantExpression,
                               @"iconRotation should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconRotation = functionExpression;
 
@@ -469,7 +478,7 @@
                       @"icon-rotation-alignment should be unset initially.");
         NSExpression *defaultExpression = layer.iconRotationAlignment;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLIconRotationAlignment:MGLIconRotationAlignmentAuto]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'auto'"];
         layer.iconRotationAlignment = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::AlignmentType> propertyValue = { mbgl::style::AlignmentType::Auto };
         XCTAssertEqual(rawLayer->getIconRotationAlignment(), propertyValue,
@@ -477,6 +486,7 @@
         XCTAssertEqualObjects(layer.iconRotationAlignment, constantExpression,
                               @"iconRotationAlignment should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'auto'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconRotationAlignment = functionExpression;
 
@@ -512,7 +522,7 @@
                       @"icon-size should be unset initially.");
         NSExpression *defaultExpression = layer.iconScale;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.iconScale = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getIconSize(), propertyValue,
@@ -520,6 +530,7 @@
         XCTAssertEqualObjects(layer.iconScale, constantExpression,
                               @"iconScale should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconScale = functionExpression;
 
@@ -572,7 +583,7 @@
                       @"icon-text-fit should be unset initially.");
         NSExpression *defaultExpression = layer.iconTextFit;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLIconTextFit:MGLIconTextFitBoth]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'both'"];
         layer.iconTextFit = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::IconTextFitType> propertyValue = { mbgl::style::IconTextFitType::Both };
         XCTAssertEqual(rawLayer->getIconTextFit(), propertyValue,
@@ -580,6 +591,7 @@
         XCTAssertEqualObjects(layer.iconTextFit, constantExpression,
                               @"iconTextFit should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'both'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconTextFit = functionExpression;
 
@@ -615,7 +627,7 @@
                       @"icon-text-fit-padding should be unset initially.");
         NSExpression *defaultExpression = layer.iconTextFitPadding;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@",
 #if TARGET_OS_IPHONE
             [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(1, 1, 1, 1)]
 #else
@@ -629,6 +641,7 @@
         XCTAssertEqualObjects(layer.iconTextFitPadding, constantExpression,
                               @"iconTextFitPadding should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"{1, 1, 1, 1}"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconTextFitPadding = functionExpression;
 
@@ -664,7 +677,7 @@
                       @"icon-keep-upright should be unset initially.");
         NSExpression *defaultExpression = layer.keepsIconUpright;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@YES];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"true"];
         layer.keepsIconUpright = constantExpression;
         mbgl::style::PropertyValue<bool> propertyValue = { true };
         XCTAssertEqual(rawLayer->getIconKeepUpright(), propertyValue,
@@ -672,6 +685,7 @@
         XCTAssertEqualObjects(layer.keepsIconUpright, constantExpression,
                               @"keepsIconUpright should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"true"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.keepsIconUpright = functionExpression;
 
@@ -707,7 +721,7 @@
                       @"text-keep-upright should be unset initially.");
         NSExpression *defaultExpression = layer.keepsTextUpright;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@NO];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"false"];
         layer.keepsTextUpright = constantExpression;
         mbgl::style::PropertyValue<bool> propertyValue = { false };
         XCTAssertEqual(rawLayer->getTextKeepUpright(), propertyValue,
@@ -715,6 +729,7 @@
         XCTAssertEqualObjects(layer.keepsTextUpright, constantExpression,
                               @"keepsTextUpright should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"false"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.keepsTextUpright = functionExpression;
 
@@ -750,7 +765,7 @@
                       @"text-max-angle should be unset initially.");
         NSExpression *defaultExpression = layer.maximumTextAngle;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.maximumTextAngle = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getTextMaxAngle(), propertyValue,
@@ -758,6 +773,7 @@
         XCTAssertEqualObjects(layer.maximumTextAngle, constantExpression,
                               @"maximumTextAngle should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.maximumTextAngle = functionExpression;
 
@@ -793,7 +809,7 @@
                       @"text-max-width should be unset initially.");
         NSExpression *defaultExpression = layer.maximumTextWidth;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.maximumTextWidth = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getTextMaxWidth(), propertyValue,
@@ -801,6 +817,7 @@
         XCTAssertEqualObjects(layer.maximumTextWidth, constantExpression,
                               @"maximumTextWidth should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.maximumTextWidth = functionExpression;
 
@@ -853,7 +870,7 @@
                       @"symbol-avoid-edges should be unset initially.");
         NSExpression *defaultExpression = layer.symbolAvoidsEdges;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@YES];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"true"];
         layer.symbolAvoidsEdges = constantExpression;
         mbgl::style::PropertyValue<bool> propertyValue = { true };
         XCTAssertEqual(rawLayer->getSymbolAvoidEdges(), propertyValue,
@@ -861,6 +878,7 @@
         XCTAssertEqualObjects(layer.symbolAvoidsEdges, constantExpression,
                               @"symbolAvoidsEdges should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"true"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.symbolAvoidsEdges = functionExpression;
 
@@ -896,7 +914,7 @@
                       @"symbol-placement should be unset initially.");
         NSExpression *defaultExpression = layer.symbolPlacement;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLSymbolPlacement:MGLSymbolPlacementLine]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'line'"];
         layer.symbolPlacement = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::SymbolPlacementType> propertyValue = { mbgl::style::SymbolPlacementType::Line };
         XCTAssertEqual(rawLayer->getSymbolPlacement(), propertyValue,
@@ -904,6 +922,7 @@
         XCTAssertEqualObjects(layer.symbolPlacement, constantExpression,
                               @"symbolPlacement should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'line'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.symbolPlacement = functionExpression;
 
@@ -939,7 +958,7 @@
                       @"symbol-spacing should be unset initially.");
         NSExpression *defaultExpression = layer.symbolSpacing;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.symbolSpacing = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getSymbolSpacing(), propertyValue,
@@ -947,6 +966,7 @@
         XCTAssertEqualObjects(layer.symbolSpacing, constantExpression,
                               @"symbolSpacing should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.symbolSpacing = functionExpression;
 
@@ -982,7 +1002,7 @@
                       @"text-field should be unset initially.");
         NSExpression *defaultExpression = layer.text;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@"Text Field"];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'Text Field'"];
         layer.text = constantExpression;
         mbgl::style::DataDrivenPropertyValue<std::string> propertyValue = { "Text Field" };
         XCTAssertEqual(rawLayer->getTextField(), propertyValue,
@@ -990,6 +1010,7 @@
         XCTAssertEqualObjects(layer.text, constantExpression,
                               @"text should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'Text Field'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.text = functionExpression;
 
@@ -1019,7 +1040,7 @@
                       @"text-allow-overlap should be unset initially.");
         NSExpression *defaultExpression = layer.textAllowsOverlap;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@YES];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"true"];
         layer.textAllowsOverlap = constantExpression;
         mbgl::style::PropertyValue<bool> propertyValue = { true };
         XCTAssertEqual(rawLayer->getTextAllowOverlap(), propertyValue,
@@ -1027,6 +1048,7 @@
         XCTAssertEqualObjects(layer.textAllowsOverlap, constantExpression,
                               @"textAllowsOverlap should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"true"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textAllowsOverlap = functionExpression;
 
@@ -1062,7 +1084,7 @@
                       @"text-anchor should be unset initially.");
         NSExpression *defaultExpression = layer.textAnchor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLTextAnchor:MGLTextAnchorBottomRight]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'bottom-right'"];
         layer.textAnchor = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::style::SymbolAnchorType> propertyValue = { mbgl::style::SymbolAnchorType::BottomRight };
         XCTAssertEqual(rawLayer->getTextAnchor(), propertyValue,
@@ -1070,6 +1092,7 @@
         XCTAssertEqualObjects(layer.textAnchor, constantExpression,
                               @"textAnchor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'bottom-right'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textAnchor = functionExpression;
 
@@ -1099,7 +1122,7 @@
                       @"text-font should be unset initially.");
         NSExpression *defaultExpression = layer.textFontNames;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@[@"Text Font", @"Tnof Txet"]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"{'Text Font', 'Tnof Txet'}"];
         layer.textFontNames = constantExpression;
         mbgl::style::PropertyValue<std::vector<std::string>> propertyValue = { { "Text Font", "Tnof Txet" } };
         XCTAssertEqual(rawLayer->getTextFont(), propertyValue,
@@ -1107,6 +1130,7 @@
         XCTAssertEqualObjects(layer.textFontNames, constantExpression,
                               @"textFontNames should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"{'Text Font', 'Tnof Txet'}"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textFontNames = functionExpression;
 
@@ -1142,7 +1166,7 @@
                       @"text-size should be unset initially.");
         NSExpression *defaultExpression = layer.textFontSize;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.textFontSize = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getTextSize(), propertyValue,
@@ -1150,6 +1174,7 @@
         XCTAssertEqualObjects(layer.textFontSize, constantExpression,
                               @"textFontSize should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textFontSize = functionExpression;
 
@@ -1202,7 +1227,7 @@
                       @"text-ignore-placement should be unset initially.");
         NSExpression *defaultExpression = layer.textIgnoresPlacement;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@YES];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"true"];
         layer.textIgnoresPlacement = constantExpression;
         mbgl::style::PropertyValue<bool> propertyValue = { true };
         XCTAssertEqual(rawLayer->getTextIgnorePlacement(), propertyValue,
@@ -1210,6 +1235,7 @@
         XCTAssertEqualObjects(layer.textIgnoresPlacement, constantExpression,
                               @"textIgnoresPlacement should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"true"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textIgnoresPlacement = functionExpression;
 
@@ -1245,7 +1271,7 @@
                       @"text-justify should be unset initially.");
         NSExpression *defaultExpression = layer.textJustification;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLTextJustification:MGLTextJustificationRight]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'right'"];
         layer.textJustification = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::style::TextJustifyType> propertyValue = { mbgl::style::TextJustifyType::Right };
         XCTAssertEqual(rawLayer->getTextJustify(), propertyValue,
@@ -1253,6 +1279,7 @@
         XCTAssertEqualObjects(layer.textJustification, constantExpression,
                               @"textJustification should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'right'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textJustification = functionExpression;
 
@@ -1282,7 +1309,7 @@
                       @"text-letter-spacing should be unset initially.");
         NSExpression *defaultExpression = layer.textLetterSpacing;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.textLetterSpacing = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getTextLetterSpacing(), propertyValue,
@@ -1290,6 +1317,7 @@
         XCTAssertEqualObjects(layer.textLetterSpacing, constantExpression,
                               @"textLetterSpacing should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textLetterSpacing = functionExpression;
 
@@ -1342,7 +1370,7 @@
                       @"text-line-height should be unset initially.");
         NSExpression *defaultExpression = layer.textLineHeight;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.textLineHeight = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getTextLineHeight(), propertyValue,
@@ -1350,6 +1378,7 @@
         XCTAssertEqualObjects(layer.textLineHeight, constantExpression,
                               @"textLineHeight should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textLineHeight = functionExpression;
 
@@ -1385,7 +1414,7 @@
                       @"text-offset should be unset initially.");
         NSExpression *defaultExpression = layer.textOffset;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@",
 #if TARGET_OS_IPHONE
             [NSValue valueWithCGVector:CGVectorMake(1, 1)]
 #else
@@ -1399,6 +1428,7 @@
         XCTAssertEqualObjects(layer.textOffset, constantExpression,
                               @"textOffset should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"{1, 1}"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textOffset = functionExpression;
 
@@ -1451,7 +1481,7 @@
                       @"text-optional should be unset initially.");
         NSExpression *defaultExpression = layer.textOptional;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@YES];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"true"];
         layer.textOptional = constantExpression;
         mbgl::style::PropertyValue<bool> propertyValue = { true };
         XCTAssertEqual(rawLayer->getTextOptional(), propertyValue,
@@ -1459,6 +1489,7 @@
         XCTAssertEqualObjects(layer.textOptional, constantExpression,
                               @"textOptional should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"true"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textOptional = functionExpression;
 
@@ -1494,7 +1525,7 @@
                       @"text-padding should be unset initially.");
         NSExpression *defaultExpression = layer.textPadding;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.textPadding = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getTextPadding(), propertyValue,
@@ -1502,6 +1533,7 @@
         XCTAssertEqualObjects(layer.textPadding, constantExpression,
                               @"textPadding should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textPadding = functionExpression;
 
@@ -1537,7 +1569,7 @@
                       @"text-pitch-alignment should be unset initially.");
         NSExpression *defaultExpression = layer.textPitchAlignment;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLTextPitchAlignment:MGLTextPitchAlignmentAuto]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'auto'"];
         layer.textPitchAlignment = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::AlignmentType> propertyValue = { mbgl::style::AlignmentType::Auto };
         XCTAssertEqual(rawLayer->getTextPitchAlignment(), propertyValue,
@@ -1545,6 +1577,7 @@
         XCTAssertEqualObjects(layer.textPitchAlignment, constantExpression,
                               @"textPitchAlignment should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'auto'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textPitchAlignment = functionExpression;
 
@@ -1580,7 +1613,7 @@
                       @"text-rotate should be unset initially.");
         NSExpression *defaultExpression = layer.textRotation;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.textRotation = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getTextRotate(), propertyValue,
@@ -1588,6 +1621,7 @@
         XCTAssertEqualObjects(layer.textRotation, constantExpression,
                               @"textRotation should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textRotation = functionExpression;
 
@@ -1640,7 +1674,7 @@
                       @"text-rotation-alignment should be unset initially.");
         NSExpression *defaultExpression = layer.textRotationAlignment;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLTextRotationAlignment:MGLTextRotationAlignmentAuto]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'auto'"];
         layer.textRotationAlignment = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::AlignmentType> propertyValue = { mbgl::style::AlignmentType::Auto };
         XCTAssertEqual(rawLayer->getTextRotationAlignment(), propertyValue,
@@ -1648,6 +1682,7 @@
         XCTAssertEqualObjects(layer.textRotationAlignment, constantExpression,
                               @"textRotationAlignment should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'auto'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textRotationAlignment = functionExpression;
 
@@ -1683,7 +1718,7 @@
                       @"text-transform should be unset initially.");
         NSExpression *defaultExpression = layer.textTransform;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLTextTransform:MGLTextTransformLowercase]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'lowercase'"];
         layer.textTransform = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::style::TextTransformType> propertyValue = { mbgl::style::TextTransformType::Lowercase };
         XCTAssertEqual(rawLayer->getTextTransform(), propertyValue,
@@ -1691,6 +1726,7 @@
         XCTAssertEqualObjects(layer.textTransform, constantExpression,
                               @"textTransform should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'lowercase'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textTransform = functionExpression;
 
@@ -1720,7 +1756,7 @@
                       @"icon-color should be unset initially.");
         NSExpression *defaultExpression = layer.iconColor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[MGLColor redColor]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         layer.iconColor = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::Color> propertyValue = { { 1, 0, 0, 1 } };
         XCTAssertEqual(rawLayer->getIconColor(), propertyValue,
@@ -1728,6 +1764,7 @@
         XCTAssertEqualObjects(layer.iconColor, constantExpression,
                               @"iconColor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconColor = functionExpression;
 
@@ -1789,7 +1826,7 @@
                       @"icon-halo-blur should be unset initially.");
         NSExpression *defaultExpression = layer.iconHaloBlur;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.iconHaloBlur = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getIconHaloBlur(), propertyValue,
@@ -1797,6 +1834,7 @@
         XCTAssertEqualObjects(layer.iconHaloBlur, constantExpression,
                               @"iconHaloBlur should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconHaloBlur = functionExpression;
 
@@ -1858,7 +1896,7 @@
                       @"icon-halo-color should be unset initially.");
         NSExpression *defaultExpression = layer.iconHaloColor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[MGLColor redColor]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         layer.iconHaloColor = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::Color> propertyValue = { { 1, 0, 0, 1 } };
         XCTAssertEqual(rawLayer->getIconHaloColor(), propertyValue,
@@ -1866,6 +1904,7 @@
         XCTAssertEqualObjects(layer.iconHaloColor, constantExpression,
                               @"iconHaloColor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconHaloColor = functionExpression;
 
@@ -1927,7 +1966,7 @@
                       @"icon-halo-width should be unset initially.");
         NSExpression *defaultExpression = layer.iconHaloWidth;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.iconHaloWidth = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getIconHaloWidth(), propertyValue,
@@ -1935,6 +1974,7 @@
         XCTAssertEqualObjects(layer.iconHaloWidth, constantExpression,
                               @"iconHaloWidth should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconHaloWidth = functionExpression;
 
@@ -1996,7 +2036,7 @@
                       @"icon-opacity should be unset initially.");
         NSExpression *defaultExpression = layer.iconOpacity;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.iconOpacity = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getIconOpacity(), propertyValue,
@@ -2004,6 +2044,7 @@
         XCTAssertEqualObjects(layer.iconOpacity, constantExpression,
                               @"iconOpacity should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconOpacity = functionExpression;
 
@@ -2065,7 +2106,7 @@
                       @"icon-translate should be unset initially.");
         NSExpression *defaultExpression = layer.iconTranslation;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@",
 #if TARGET_OS_IPHONE
             [NSValue valueWithCGVector:CGVectorMake(1, 1)]
 #else
@@ -2079,6 +2120,7 @@
         XCTAssertEqualObjects(layer.iconTranslation, constantExpression,
                               @"iconTranslation should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"{1, 1}"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconTranslation = functionExpression;
 
@@ -2114,7 +2156,7 @@
                       @"icon-translate-anchor should be unset initially.");
         NSExpression *defaultExpression = layer.iconTranslationAnchor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLIconTranslationAnchor:MGLIconTranslationAnchorViewport]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         layer.iconTranslationAnchor = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::TranslateAnchorType> propertyValue = { mbgl::style::TranslateAnchorType::Viewport };
         XCTAssertEqual(rawLayer->getIconTranslateAnchor(), propertyValue,
@@ -2122,6 +2164,7 @@
         XCTAssertEqualObjects(layer.iconTranslationAnchor, constantExpression,
                               @"iconTranslationAnchor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.iconTranslationAnchor = functionExpression;
 
@@ -2157,7 +2200,7 @@
                       @"text-color should be unset initially.");
         NSExpression *defaultExpression = layer.textColor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[MGLColor redColor]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         layer.textColor = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::Color> propertyValue = { { 1, 0, 0, 1 } };
         XCTAssertEqual(rawLayer->getTextColor(), propertyValue,
@@ -2165,6 +2208,7 @@
         XCTAssertEqualObjects(layer.textColor, constantExpression,
                               @"textColor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textColor = functionExpression;
 
@@ -2226,7 +2270,7 @@
                       @"text-halo-blur should be unset initially.");
         NSExpression *defaultExpression = layer.textHaloBlur;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.textHaloBlur = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getTextHaloBlur(), propertyValue,
@@ -2234,6 +2278,7 @@
         XCTAssertEqualObjects(layer.textHaloBlur, constantExpression,
                               @"textHaloBlur should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textHaloBlur = functionExpression;
 
@@ -2295,7 +2340,7 @@
                       @"text-halo-color should be unset initially.");
         NSExpression *defaultExpression = layer.textHaloColor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[MGLColor redColor]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         layer.textHaloColor = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::Color> propertyValue = { { 1, 0, 0, 1 } };
         XCTAssertEqual(rawLayer->getTextHaloColor(), propertyValue,
@@ -2303,6 +2348,7 @@
         XCTAssertEqualObjects(layer.textHaloColor, constantExpression,
                               @"textHaloColor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textHaloColor = functionExpression;
 
@@ -2364,7 +2410,7 @@
                       @"text-halo-width should be unset initially.");
         NSExpression *defaultExpression = layer.textHaloWidth;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.textHaloWidth = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getTextHaloWidth(), propertyValue,
@@ -2372,6 +2418,7 @@
         XCTAssertEqualObjects(layer.textHaloWidth, constantExpression,
                               @"textHaloWidth should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textHaloWidth = functionExpression;
 
@@ -2433,7 +2480,7 @@
                       @"text-opacity should be unset initially.");
         NSExpression *defaultExpression = layer.textOpacity;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.textOpacity = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getTextOpacity(), propertyValue,
@@ -2441,6 +2488,7 @@
         XCTAssertEqualObjects(layer.textOpacity, constantExpression,
                               @"textOpacity should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textOpacity = functionExpression;
 
@@ -2502,7 +2550,7 @@
                       @"text-translate should be unset initially.");
         NSExpression *defaultExpression = layer.textTranslation;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@",
 #if TARGET_OS_IPHONE
             [NSValue valueWithCGVector:CGVectorMake(1, 1)]
 #else
@@ -2516,6 +2564,7 @@
         XCTAssertEqualObjects(layer.textTranslation, constantExpression,
                               @"textTranslation should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"{1, 1}"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textTranslation = functionExpression;
 
@@ -2551,7 +2600,7 @@
                       @"text-translate-anchor should be unset initially.");
         NSExpression *defaultExpression = layer.textTranslationAnchor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLTextTranslationAnchor:MGLTextTranslationAnchorViewport]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         layer.textTranslationAnchor = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::TranslateAnchorType> propertyValue = { mbgl::style::TranslateAnchorType::Viewport };
         XCTAssertEqual(rawLayer->getTextTranslateAnchor(), propertyValue,
@@ -2559,6 +2608,7 @@
         XCTAssertEqualObjects(layer.textTranslationAnchor, constantExpression,
                               @"textTranslationAnchor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.textTranslationAnchor = functionExpression;
 

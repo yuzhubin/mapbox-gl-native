@@ -33,7 +33,7 @@
                       @"background-color should be unset initially.");
         NSExpression *defaultExpression = layer.backgroundColor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[MGLColor redColor]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         layer.backgroundColor = constantExpression;
         mbgl::style::PropertyValue<mbgl::Color> propertyValue = { { 1, 0, 0, 1 } };
         XCTAssertEqual(rawLayer->getBackgroundColor(), propertyValue,
@@ -41,6 +41,7 @@
         XCTAssertEqualObjects(layer.backgroundColor, constantExpression,
                               @"backgroundColor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.backgroundColor = functionExpression;
 
@@ -85,7 +86,7 @@
                       @"background-opacity should be unset initially.");
         NSExpression *defaultExpression = layer.backgroundOpacity;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.backgroundOpacity = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getBackgroundOpacity(), propertyValue,
@@ -93,6 +94,7 @@
         XCTAssertEqualObjects(layer.backgroundOpacity, constantExpression,
                               @"backgroundOpacity should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.backgroundOpacity = functionExpression;
 
@@ -137,7 +139,7 @@
                       @"background-pattern should be unset initially.");
         NSExpression *defaultExpression = layer.backgroundPattern;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@"Background Pattern"];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'Background Pattern'"];
         layer.backgroundPattern = constantExpression;
         mbgl::style::PropertyValue<std::string> propertyValue = { "Background Pattern" };
         XCTAssertEqual(rawLayer->getBackgroundPattern(), propertyValue,
@@ -145,6 +147,7 @@
         XCTAssertEqualObjects(layer.backgroundPattern, constantExpression,
                               @"backgroundPattern should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'Background Pattern'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.backgroundPattern = functionExpression;
 

@@ -99,37 +99,42 @@ global.testImplementation = function (property, layerType, isFunction) {
     return `layer.${objCName(property)} = [MGLRuntimeStylingHelper ${helperMsg}];`;
 };
 
-global.objCTestValue = function (property, layerType, indent) {
+global.objCTestValue = function (property, layerType, arraysAsStructs, indent) {
     let propertyName = originalPropertyName(property);
     switch (property.type) {
         case 'boolean':
-            return property.default ? '@NO' : '@YES';
+            return property.default ? '@"false"' : '@"true"';
         case 'number':
-            return '@0xff';
+            return '@"0xff"';
         case 'string':
-            return `@"${_.startCase(propertyName)}"`;
+            return `@"'${_.startCase(propertyName)}'"`;
         case 'enum':
-            let type = objCType(layerType, property.name);
-            let value = `${type}${camelize(_.last(_.keys(property.values)))}`;
-            return `[NSValue valueWith${type}:${value}]`;
+            return `@"'${_.last(_.keys(property.values))}'"`;
         case 'color':
-            return '[MGLColor redColor]';
+            return '@"%@", [MGLColor redColor]';
         case 'array':
             switch (arrayType(property)) {
                 case 'dasharray':
-                    return '@[@1, @2]';
+                    return '@"{1, 2}"';
                 case 'font':
-                    return `@[@"${_.startCase(propertyName)}", @"${_.startCase(_.reverse(propertyName.split('')).join(''))}"]`;
+                    return `@"{'${_.startCase(propertyName)}', '${_.startCase(_.reverse(propertyName.split('')).join(''))}'}"`;
                 case 'padding': {
-                    let iosValue = '[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(1, 1, 1, 1)]'.indent(indent * 4);
-                    let macosValue = '[NSValue valueWithEdgeInsets:NSEdgeInsetsMake(1, 1, 1, 1)]'.indent(indent * 4);
-                    return `\n#if TARGET_OS_IPHONE\n${iosValue}\n#else\n${macosValue}\n#endif\n${''.indent((indent - 1) * 4)}`;
+                    if (arraysAsStructs) {
+                        let iosValue = '[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(1, 1, 1, 1)]'.indent(indent * 4);
+                        let macosValue = '[NSValue valueWithEdgeInsets:NSEdgeInsetsMake(1, 1, 1, 1)]'.indent(indent * 4);
+                        return `@"%@",\n#if TARGET_OS_IPHONE\n${iosValue}\n#else\n${macosValue}\n#endif\n${''.indent((indent - 1) * 4)}`;
+                    }
+                    return '@"{1, 1, 1, 1}"';
                 }
                 case 'offset':
-                case 'translate':
-                    let iosValue = '[NSValue valueWithCGVector:CGVectorMake(1, 1)]'.indent(indent * 4);
-                    let macosValue = '[NSValue valueWithMGLVector:CGVectorMake(1, -1)]'.indent(indent * 4);
-                    return `\n#if TARGET_OS_IPHONE\n${iosValue}\n#else\n${macosValue}\n#endif\n${''.indent((indent - 1) * 4)}`;
+                case 'translate': {
+                    if (arraysAsStructs) {
+                        let iosValue = '[NSValue valueWithCGVector:CGVectorMake(1, 1)]'.indent(indent * 4);
+                        let macosValue = '[NSValue valueWithMGLVector:CGVectorMake(1, -1)]'.indent(indent * 4);
+                        return `@"%@",\n#if TARGET_OS_IPHONE\n${iosValue}\n#else\n${macosValue}\n#endif\n${''.indent((indent - 1) * 4)}`;
+                    }
+                    return '@"{1, 1}"';
+                }
                 default:
                     throw new Error(`unknown array type for ${property.name}`);
             }

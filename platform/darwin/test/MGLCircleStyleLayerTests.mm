@@ -54,7 +54,7 @@
                       @"circle-blur should be unset initially.");
         NSExpression *defaultExpression = layer.circleBlur;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.circleBlur = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getCircleBlur(), propertyValue,
@@ -62,6 +62,7 @@
         XCTAssertEqualObjects(layer.circleBlur, constantExpression,
                               @"circleBlur should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.circleBlur = functionExpression;
 
@@ -123,7 +124,7 @@
                       @"circle-color should be unset initially.");
         NSExpression *defaultExpression = layer.circleColor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[MGLColor redColor]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         layer.circleColor = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::Color> propertyValue = { { 1, 0, 0, 1 } };
         XCTAssertEqual(rawLayer->getCircleColor(), propertyValue,
@@ -131,6 +132,7 @@
         XCTAssertEqualObjects(layer.circleColor, constantExpression,
                               @"circleColor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.circleColor = functionExpression;
 
@@ -192,7 +194,7 @@
                       @"circle-opacity should be unset initially.");
         NSExpression *defaultExpression = layer.circleOpacity;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.circleOpacity = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getCircleOpacity(), propertyValue,
@@ -200,6 +202,7 @@
         XCTAssertEqualObjects(layer.circleOpacity, constantExpression,
                               @"circleOpacity should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.circleOpacity = functionExpression;
 
@@ -261,7 +264,7 @@
                       @"circle-pitch-alignment should be unset initially.");
         NSExpression *defaultExpression = layer.circlePitchAlignment;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLCirclePitchAlignment:MGLCirclePitchAlignmentViewport]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         layer.circlePitchAlignment = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::AlignmentType> propertyValue = { mbgl::style::AlignmentType::Viewport };
         XCTAssertEqual(rawLayer->getCirclePitchAlignment(), propertyValue,
@@ -269,6 +272,7 @@
         XCTAssertEqualObjects(layer.circlePitchAlignment, constantExpression,
                               @"circlePitchAlignment should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.circlePitchAlignment = functionExpression;
 
@@ -304,7 +308,7 @@
                       @"circle-radius should be unset initially.");
         NSExpression *defaultExpression = layer.circleRadius;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.circleRadius = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getCircleRadius(), propertyValue,
@@ -312,6 +316,7 @@
         XCTAssertEqualObjects(layer.circleRadius, constantExpression,
                               @"circleRadius should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.circleRadius = functionExpression;
 
@@ -373,7 +378,7 @@
                       @"circle-pitch-scale should be unset initially.");
         NSExpression *defaultExpression = layer.circleScaleAlignment;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLCircleScaleAlignment:MGLCircleScaleAlignmentViewport]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         layer.circleScaleAlignment = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::CirclePitchScaleType> propertyValue = { mbgl::style::CirclePitchScaleType::Viewport };
         XCTAssertEqual(rawLayer->getCirclePitchScale(), propertyValue,
@@ -381,6 +386,7 @@
         XCTAssertEqualObjects(layer.circleScaleAlignment, constantExpression,
                               @"circleScaleAlignment should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.circleScaleAlignment = functionExpression;
 
@@ -416,7 +422,7 @@
                       @"circle-stroke-color should be unset initially.");
         NSExpression *defaultExpression = layer.circleStrokeColor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[MGLColor redColor]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         layer.circleStrokeColor = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::Color> propertyValue = { { 1, 0, 0, 1 } };
         XCTAssertEqual(rawLayer->getCircleStrokeColor(), propertyValue,
@@ -424,6 +430,7 @@
         XCTAssertEqualObjects(layer.circleStrokeColor, constantExpression,
                               @"circleStrokeColor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.circleStrokeColor = functionExpression;
 
@@ -485,7 +492,7 @@
                       @"circle-stroke-opacity should be unset initially.");
         NSExpression *defaultExpression = layer.circleStrokeOpacity;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.circleStrokeOpacity = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getCircleStrokeOpacity(), propertyValue,
@@ -493,6 +500,7 @@
         XCTAssertEqualObjects(layer.circleStrokeOpacity, constantExpression,
                               @"circleStrokeOpacity should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.circleStrokeOpacity = functionExpression;
 
@@ -554,7 +562,7 @@
                       @"circle-stroke-width should be unset initially.");
         NSExpression *defaultExpression = layer.circleStrokeWidth;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.circleStrokeWidth = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getCircleStrokeWidth(), propertyValue,
@@ -562,6 +570,7 @@
         XCTAssertEqualObjects(layer.circleStrokeWidth, constantExpression,
                               @"circleStrokeWidth should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.circleStrokeWidth = functionExpression;
 
@@ -623,7 +632,7 @@
                       @"circle-translate should be unset initially.");
         NSExpression *defaultExpression = layer.circleTranslation;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@",
 #if TARGET_OS_IPHONE
             [NSValue valueWithCGVector:CGVectorMake(1, 1)]
 #else
@@ -637,6 +646,7 @@
         XCTAssertEqualObjects(layer.circleTranslation, constantExpression,
                               @"circleTranslation should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"{1, 1}"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.circleTranslation = functionExpression;
 
@@ -672,7 +682,7 @@
                       @"circle-translate-anchor should be unset initially.");
         NSExpression *defaultExpression = layer.circleTranslationAnchor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLCircleTranslationAnchor:MGLCircleTranslationAnchorViewport]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         layer.circleTranslationAnchor = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::TranslateAnchorType> propertyValue = { mbgl::style::TranslateAnchorType::Viewport };
         XCTAssertEqual(rawLayer->getCircleTranslateAnchor(), propertyValue,
@@ -680,6 +690,7 @@
         XCTAssertEqualObjects(layer.circleTranslationAnchor, constantExpression,
                               @"circleTranslationAnchor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.circleTranslationAnchor = functionExpression;
 

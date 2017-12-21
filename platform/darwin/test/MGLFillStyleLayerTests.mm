@@ -54,7 +54,7 @@
                       @"fill-antialias should be unset initially.");
         NSExpression *defaultExpression = layer.fillAntialiased;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@NO];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"false"];
         layer.fillAntialiased = constantExpression;
         mbgl::style::PropertyValue<bool> propertyValue = { false };
         XCTAssertEqual(rawLayer->getFillAntialias(), propertyValue,
@@ -62,6 +62,7 @@
         XCTAssertEqualObjects(layer.fillAntialiased, constantExpression,
                               @"fillAntialiased should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"false"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillAntialiased = functionExpression;
 
@@ -97,7 +98,7 @@
                       @"fill-color should be unset initially.");
         NSExpression *defaultExpression = layer.fillColor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[MGLColor redColor]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         layer.fillColor = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::Color> propertyValue = { { 1, 0, 0, 1 } };
         XCTAssertEqual(rawLayer->getFillColor(), propertyValue,
@@ -105,6 +106,7 @@
         XCTAssertEqualObjects(layer.fillColor, constantExpression,
                               @"fillColor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillColor = functionExpression;
 
@@ -166,7 +168,7 @@
                       @"fill-opacity should be unset initially.");
         NSExpression *defaultExpression = layer.fillOpacity;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.fillOpacity = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getFillOpacity(), propertyValue,
@@ -174,6 +176,7 @@
         XCTAssertEqualObjects(layer.fillOpacity, constantExpression,
                               @"fillOpacity should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillOpacity = functionExpression;
 
@@ -235,7 +238,7 @@
                       @"fill-outline-color should be unset initially.");
         NSExpression *defaultExpression = layer.fillOutlineColor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[MGLColor redColor]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         layer.fillOutlineColor = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::Color> propertyValue = { { 1, 0, 0, 1 } };
         XCTAssertEqual(rawLayer->getFillOutlineColor(), propertyValue,
@@ -243,6 +246,7 @@
         XCTAssertEqualObjects(layer.fillOutlineColor, constantExpression,
                               @"fillOutlineColor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillOutlineColor = functionExpression;
 
@@ -304,7 +308,7 @@
                       @"fill-pattern should be unset initially.");
         NSExpression *defaultExpression = layer.fillPattern;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@"Fill Pattern"];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'Fill Pattern'"];
         layer.fillPattern = constantExpression;
         mbgl::style::PropertyValue<std::string> propertyValue = { "Fill Pattern" };
         XCTAssertEqual(rawLayer->getFillPattern(), propertyValue,
@@ -312,6 +316,7 @@
         XCTAssertEqualObjects(layer.fillPattern, constantExpression,
                               @"fillPattern should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'Fill Pattern'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillPattern = functionExpression;
 
@@ -356,7 +361,7 @@
                       @"fill-translate should be unset initially.");
         NSExpression *defaultExpression = layer.fillTranslation;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@",
 #if TARGET_OS_IPHONE
             [NSValue valueWithCGVector:CGVectorMake(1, 1)]
 #else
@@ -370,6 +375,7 @@
         XCTAssertEqualObjects(layer.fillTranslation, constantExpression,
                               @"fillTranslation should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"{1, 1}"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillTranslation = functionExpression;
 
@@ -405,7 +411,7 @@
                       @"fill-translate-anchor should be unset initially.");
         NSExpression *defaultExpression = layer.fillTranslationAnchor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLFillTranslationAnchor:MGLFillTranslationAnchorViewport]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         layer.fillTranslationAnchor = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::TranslateAnchorType> propertyValue = { mbgl::style::TranslateAnchorType::Viewport };
         XCTAssertEqual(rawLayer->getFillTranslateAnchor(), propertyValue,
@@ -413,6 +419,7 @@
         XCTAssertEqualObjects(layer.fillTranslationAnchor, constantExpression,
                               @"fillTranslationAnchor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.fillTranslationAnchor = functionExpression;
 

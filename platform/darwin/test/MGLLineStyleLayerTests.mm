@@ -54,7 +54,7 @@
                       @"line-cap should be unset initially.");
         NSExpression *defaultExpression = layer.lineCap;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLLineCap:MGLLineCapSquare]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'square'"];
         layer.lineCap = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::LineCapType> propertyValue = { mbgl::style::LineCapType::Square };
         XCTAssertEqual(rawLayer->getLineCap(), propertyValue,
@@ -62,6 +62,7 @@
         XCTAssertEqualObjects(layer.lineCap, constantExpression,
                               @"lineCap should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'square'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.lineCap = functionExpression;
 
@@ -97,7 +98,7 @@
                       @"line-join should be unset initially.");
         NSExpression *defaultExpression = layer.lineJoin;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLLineJoin:MGLLineJoinMiter]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'miter'"];
         layer.lineJoin = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::style::LineJoinType> propertyValue = { mbgl::style::LineJoinType::Miter };
         XCTAssertEqual(rawLayer->getLineJoin(), propertyValue,
@@ -105,6 +106,7 @@
         XCTAssertEqualObjects(layer.lineJoin, constantExpression,
                               @"lineJoin should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'miter'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.lineJoin = functionExpression;
 
@@ -134,7 +136,7 @@
                       @"line-miter-limit should be unset initially.");
         NSExpression *defaultExpression = layer.lineMiterLimit;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.lineMiterLimit = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getLineMiterLimit(), propertyValue,
@@ -142,6 +144,7 @@
         XCTAssertEqualObjects(layer.lineMiterLimit, constantExpression,
                               @"lineMiterLimit should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.lineMiterLimit = functionExpression;
 
@@ -177,7 +180,7 @@
                       @"line-round-limit should be unset initially.");
         NSExpression *defaultExpression = layer.lineRoundLimit;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.lineRoundLimit = constantExpression;
         mbgl::style::PropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getLineRoundLimit(), propertyValue,
@@ -185,6 +188,7 @@
         XCTAssertEqualObjects(layer.lineRoundLimit, constantExpression,
                               @"lineRoundLimit should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.lineRoundLimit = functionExpression;
 
@@ -220,7 +224,7 @@
                       @"line-blur should be unset initially.");
         NSExpression *defaultExpression = layer.lineBlur;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.lineBlur = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getLineBlur(), propertyValue,
@@ -228,6 +232,7 @@
         XCTAssertEqualObjects(layer.lineBlur, constantExpression,
                               @"lineBlur should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.lineBlur = functionExpression;
 
@@ -289,7 +294,7 @@
                       @"line-color should be unset initially.");
         NSExpression *defaultExpression = layer.lineColor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[MGLColor redColor]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         layer.lineColor = constantExpression;
         mbgl::style::DataDrivenPropertyValue<mbgl::Color> propertyValue = { { 1, 0, 0, 1 } };
         XCTAssertEqual(rawLayer->getLineColor(), propertyValue,
@@ -297,6 +302,7 @@
         XCTAssertEqualObjects(layer.lineColor, constantExpression,
                               @"lineColor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"%@", [MGLColor redColor]];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.lineColor = functionExpression;
 
@@ -358,7 +364,7 @@
                       @"line-dasharray should be unset initially.");
         NSExpression *defaultExpression = layer.lineDashPattern;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@[@1, @2]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"{1, 2}"];
         layer.lineDashPattern = constantExpression;
         mbgl::style::PropertyValue<std::vector<float>> propertyValue = { {1, 2} };
         XCTAssertEqual(rawLayer->getLineDasharray(), propertyValue,
@@ -366,6 +372,7 @@
         XCTAssertEqualObjects(layer.lineDashPattern, constantExpression,
                               @"lineDashPattern should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"{1, 2}"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.lineDashPattern = functionExpression;
 
@@ -401,7 +408,7 @@
                       @"line-gap-width should be unset initially.");
         NSExpression *defaultExpression = layer.lineGapWidth;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.lineGapWidth = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getLineGapWidth(), propertyValue,
@@ -409,6 +416,7 @@
         XCTAssertEqualObjects(layer.lineGapWidth, constantExpression,
                               @"lineGapWidth should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.lineGapWidth = functionExpression;
 
@@ -470,7 +478,7 @@
                       @"line-offset should be unset initially.");
         NSExpression *defaultExpression = layer.lineOffset;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.lineOffset = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getLineOffset(), propertyValue,
@@ -478,6 +486,7 @@
         XCTAssertEqualObjects(layer.lineOffset, constantExpression,
                               @"lineOffset should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.lineOffset = functionExpression;
 
@@ -539,7 +548,7 @@
                       @"line-opacity should be unset initially.");
         NSExpression *defaultExpression = layer.lineOpacity;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.lineOpacity = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getLineOpacity(), propertyValue,
@@ -547,6 +556,7 @@
         XCTAssertEqualObjects(layer.lineOpacity, constantExpression,
                               @"lineOpacity should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.lineOpacity = functionExpression;
 
@@ -608,7 +618,7 @@
                       @"line-pattern should be unset initially.");
         NSExpression *defaultExpression = layer.linePattern;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@"Line Pattern"];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'Line Pattern'"];
         layer.linePattern = constantExpression;
         mbgl::style::PropertyValue<std::string> propertyValue = { "Line Pattern" };
         XCTAssertEqual(rawLayer->getLinePattern(), propertyValue,
@@ -616,6 +626,7 @@
         XCTAssertEqualObjects(layer.linePattern, constantExpression,
                               @"linePattern should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'Line Pattern'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.linePattern = functionExpression;
 
@@ -660,7 +671,7 @@
                       @"line-translate should be unset initially.");
         NSExpression *defaultExpression = layer.lineTranslation;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"%@",
 #if TARGET_OS_IPHONE
             [NSValue valueWithCGVector:CGVectorMake(1, 1)]
 #else
@@ -674,6 +685,7 @@
         XCTAssertEqualObjects(layer.lineTranslation, constantExpression,
                               @"lineTranslation should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"{1, 1}"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.lineTranslation = functionExpression;
 
@@ -709,7 +721,7 @@
                       @"line-translate-anchor should be unset initially.");
         NSExpression *defaultExpression = layer.lineTranslationAnchor;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:[NSValue valueWithMGLLineTranslationAnchor:MGLLineTranslationAnchorViewport]];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         layer.lineTranslationAnchor = constantExpression;
         mbgl::style::PropertyValue<mbgl::style::TranslateAnchorType> propertyValue = { mbgl::style::TranslateAnchorType::Viewport };
         XCTAssertEqual(rawLayer->getLineTranslateAnchor(), propertyValue,
@@ -717,6 +729,7 @@
         XCTAssertEqualObjects(layer.lineTranslationAnchor, constantExpression,
                               @"lineTranslationAnchor should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"'viewport'"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.lineTranslationAnchor = functionExpression;
 
@@ -752,7 +765,7 @@
                       @"line-width should be unset initially.");
         NSExpression *defaultExpression = layer.lineWidth;
 
-        NSExpression *constantExpression = [NSExpression expressionForConstantValue:@0xff];
+        NSExpression *constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         layer.lineWidth = constantExpression;
         mbgl::style::DataDrivenPropertyValue<float> propertyValue = { 0xff };
         XCTAssertEqual(rawLayer->getLineWidth(), propertyValue,
@@ -760,6 +773,7 @@
         XCTAssertEqualObjects(layer.lineWidth, constantExpression,
                               @"lineWidth should round-trip constant value expressions.");
 
+        constantExpression = [NSExpression expressionWithFormat:@"0xff"];
         NSExpression *functionExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_stepWithMinimum:stops:', %@, %@)", constantExpression, @{@18: constantExpression}];
         layer.lineWidth = functionExpression;
 
