@@ -788,9 +788,9 @@ NS_ARRAY_OF(id <MGLAnnotation>) *MBXFlattenedShapes(NS_ARRAY_OF(id <MGLAnnotatio
 
     MGLStyleLayer *waterLayer = [self.mapView.style layerWithIdentifier:@"water"];
     NSExpression *colorExpression = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_interpolateWithCurveType:parameters:stops:', 'linear', nil, %@)", @{
-        @0.0: [NSExpression expressionForConstantValue:[NSColor redColor]],
-        @10.0: [NSExpression expressionForConstantValue:[NSColor yellowColor]],
-        @20.0: [NSExpression expressionForConstantValue:[NSColor blackColor]],
+        @0.0: [NSColor redColor],
+        @10.0: [NSColor yellowColor],
+        @20.0: [NSColor blackColor],
     }];
     
     if ([waterLayer respondsToSelector:@selector(fillColor)]) {
@@ -821,9 +821,9 @@ NS_ARRAY_OF(id <MGLAnnotation>) *MBXFlattenedShapes(NS_ARRAY_OF(id <MGLAnnotatio
         theaterLayer.iconImageName = [NSExpression expressionForConstantValue:NSImageNameIChatTheaterTemplate];
         theaterLayer.iconScale = [NSExpression expressionForConstantValue:@2];
         theaterLayer.iconColor = [NSExpression expressionWithFormat:@"FUNCTION($zoomLevel, 'mgl_interpolateWithCurveType:parameters:stops:', 'linear', nil, %@)", @{
-            @16.0: [NSExpression expressionForConstantValue:[NSColor redColor]],
-            @18.0: [NSExpression expressionForConstantValue:[NSColor yellowColor]],
-            @20.0: [NSExpression expressionForConstantValue:[NSColor blackColor]],
+            @16.0: [NSColor redColor],
+            @18.0: [NSColor yellowColor],
+            @20.0: [NSColor blackColor],
         }];
         [self.mapView.style addLayer:theaterLayer];
     }
