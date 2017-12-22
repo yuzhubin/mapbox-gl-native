@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.mapbox.mapboxsdk.exceptions.ConversionException;
+import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.functions.Function;
 import com.mapbox.mapboxsdk.utils.ColorUtils;
 
@@ -57,6 +58,36 @@ public class PropertyValue<T> {
     return !isNull() && !isFunction();
   }
 
+  /**
+   * Returns if this is a expression.
+   *
+   * @return true if is a expression, false if not
+   */
+  public boolean isExpression() {
+    return !isNull() && value instanceof Expression;
+  }
+
+  /**
+   * Get the expression of the property.
+   *
+   * @return the expression value
+   */
+  @Nullable
+  public Expression<T> getExpression() {
+    if (isExpression()) {
+      // noinspection unchecked
+      return (Expression<T>) value;
+    } else {
+      Timber.e("not an expression, try value");
+      return null;
+    }
+  }
+
+  /**
+   * Get the function of the property.
+   *
+   * @return the function value
+   */
   @Nullable
   public Function<?, T> getFunction() {
     if (isFunction()) {

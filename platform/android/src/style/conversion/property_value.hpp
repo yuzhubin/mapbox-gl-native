@@ -41,6 +41,10 @@ public:
       return *convert<jni::jobject*, mbgl::style::CompositeFunction<T>>(env, value);
     }
 
+    jni::jobject* operator()(const mbgl::style::expression::Expression<T> &value) const {
+      return *convert<jni::jobject*, mbgl::style::expression::Expression<T>>(env, value);
+    }
+
 private:
     jni::JNIEnv& env;
 
