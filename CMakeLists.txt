@@ -10,6 +10,7 @@ option(WITH_CXX11ABI "Use cxx11abi mason packages" OFF)
 option(WITH_COVERAGE "Enable coverage reports" OFF)
 option(WITH_OSMESA   "Use OSMesa headless backend" OFF)
 option(WITH_EGL      "Use EGL backend" OFF)
+option(WITH_TESTS    "Build tests" ON)
 
 if(WITH_CXX11ABI)
     set(MASON_CXXABI_SUFFIX -cxx11abi)
