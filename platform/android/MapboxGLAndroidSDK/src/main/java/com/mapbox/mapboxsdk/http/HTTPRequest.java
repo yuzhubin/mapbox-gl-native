@@ -94,7 +94,7 @@ class HTTPRequest implements Callback {
         onResponse(mCall, mCall.execute());
       }
     } catch (Exception exception) {
-      onFailure(exception);
+      onFailure(mCall, exception);
     }
   }
 
@@ -128,7 +128,7 @@ class HTTPRequest implements Callback {
     try {
       body = response.body().bytes();
     } catch (IOException ioException) {
-      onFailure(ioException);
+      onFailure(call, ioException);
       // throw ioException;
       return;
     } finally {
@@ -151,10 +151,10 @@ class HTTPRequest implements Callback {
 
   @Override
   public void onFailure(Call call, IOException e) {
-    onFailure(e);
+    onFailure(call, e);
   }
 
-  private void onFailure(Exception e) {
+  private void onFailure(Call call, Exception e) {
     int type = PERMANENT_ERROR;
     if ((e instanceof NoRouteToHostException) || (e instanceof UnknownHostException) || (e instanceof SocketException)
       || (e instanceof ProtocolException) || (e instanceof SSLException)) {
@@ -163,15 +163,15 @@ class HTTPRequest implements Callback {
       type = TEMPORARY_ERROR;
     }
 
+    String requestUrl = call.request().url().toString();
     String errorMessage = e.getMessage() != null ? e.getMessage() : "Error processing the request";
-
     if (type == TEMPORARY_ERROR) {
-      Timber.d("Request failed due to a temporary error: %s", errorMessage);
+      Timber.d("Request with url %s failed due to a temporary error: %s", requestUrl, errorMessage);
     } else if (type == CONNECTION_ERROR) {
-      Timber.i("Request failed due to a connection error: %s", errorMessage);
+      Timber.i("Request with url %s failed due to a connection error: %s", requestUrl, errorMessage);
     } else {
       // PERMANENT_ERROR
-      Timber.w("Request failed due to a permanent error: %s", errorMessage);
+      Timber.w("Request with url %s failed due to a permanent error: %s", requestUrl, errorMessage);
     }
 
     mLock.lock();
